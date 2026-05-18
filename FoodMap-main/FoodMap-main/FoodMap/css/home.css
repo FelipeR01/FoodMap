@@ -1,0 +1,21 @@
+.secao {
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.hero__content {
+    padding: 10px;
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+}
+
+.badge-gif {
+    mix-blend-mode: multiply;
+    max-width: 18px;
+}
+.display-lg{
+    
+}
