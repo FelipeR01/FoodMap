@@ -1,0 +1,184 @@
+/* =====================================================
+   FOODMAP — Global Styles
+   ===================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md-size);
+  line-height: var(--text-body-md-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a  { color: inherit; text-decoration: none; }
+
+/* ── Container ───────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter);
+}
+
+/* ── Tipografia ──────────────────────────────────────── */
+.display-lg {
+  font-family: var(--font-serif);
+  font-size: var(--text-display-lg-size);
+  font-weight: var(--text-display-lg-weight);
+  line-height: var(--text-display-lg-height);
+  letter-spacing: var(--text-display-lg-spacing);
+}
+.headline-lg {
+  font-family: var(--font-serif);
+  font-size: var(--text-headline-lg-size);
+  font-weight: var(--text-headline-lg-weight);
+  line-height: var(--text-headline-lg-height);
+}
+.headline-md {
+  font-family: var(--font-serif);
+  font-size: var(--text-headline-md-size);
+  font-weight: var(--text-headline-md-weight);
+  line-height: var(--text-headline-md-height);
+}
+.body-lg  { font-size: var(--text-body-lg-size);  line-height: var(--text-body-lg-height);  }
+.body-md  { font-size: var(--text-body-md-size);  line-height: var(--text-body-md-height);  }
+.label-md {
+  font-size: var(--text-label-md-size);
+  font-weight: var(--text-label-md-weight);
+  letter-spacing: var(--text-label-md-spacing);
+  line-height: var(--text-label-md-height);
+}
+.label-sm {
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--text-label-sm-weight);
+  line-height: var(--text-label-sm-height);
+}
+
+/* ── Botões ──────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: 48px;
+  padding: 0 var(--space-lg);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--text-label-md-size);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+.btn:hover  { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+.btn-primary:hover { box-shadow: var(--shadow-card-hover); }
+
+.btn-secondary {
+  background-color: var(--color-secondary-container);
+  color: var(--color-primary);
+}
+.btn-secondary:hover { box-shadow: var(--shadow-card); }
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+}
+.btn-outline:hover { background-color: var(--color-surface-container-low); }
+
+/* ── Cards ───────────────────────────────────────────── */
+.card {
+  background-color: var(--color-surface-container-lowest);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-lg);
+  transition: box-shadow 0.2s ease;
+}
+.card:hover { box-shadow: var(--shadow-card-hover); }
+
+/* ── Badges / Chips ──────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--text-label-sm-weight);
+  background-color: var(--color-secondary-container);
+  color: var(--color-primary);
+}
+.badge-urgent {
+  background-color: var(--color-error-container);
+  color: var(--color-on-error-container);
+}
+
+/* ── Inputs ──────────────────────────────────────────── */
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 var(--space-md);
+  background-color: var(--color-surface-container-lowest);
+  border: 1.5px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md-size);
+  color: var(--color-on-surface);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.input:focus { border-color: var(--color-primary); }
+.input::placeholder { color: var(--color-outline); }
+
+.input-label {
+  display: block;
+  font-size: var(--text-label-md-size);
+  font-weight: 500;
+  color: var(--color-on-surface-variant);
+  margin-bottom: var(--space-xs);
+}
+
+/* ── Progress Bar ────────────────────────────────────── */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: var(--color-secondary-container);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+/* ── Seções ──────────────────────────────────────────── */
+.section { padding-block: var(--space-xxl); }
+.section-sm { padding-block: var(--space-xl); }
+
+/* ── Utilitários de texto ────────────────────────────── */
+.text-primary  { color: var(--color-primary); }
+.text-muted    { color: var(--color-on-surface-variant); }
+.text-center   { text-align: center; }
+
+/* ── Responsividade: mobile ──────────────────────────── */
+@media (max-width: 767px) {
+  :root { --container-gutter: 16px; }
+
+  .display-lg  { font-size: 36px; }
+  .headline-lg { font-size: 28px; }
+  .headline-md { font-size: 22px; }
+}
