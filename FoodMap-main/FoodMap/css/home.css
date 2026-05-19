@@ -1,0 +1,75 @@
+
+*{
+    box-sizing: border-box;
+}
+
+.secao {
+    margin-top: 80px;
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero{
+    background-color: var(--color-background); 
+    /* Como a section ocupa 100% da tela, a cor vai de ponta a ponta */
+    width: 100%; 
+    min-height: 750px; /* Alterado de height para min-height para melhorar a responsividade */
+    margin-bottom: 80px;
+}
+
+.hero__content {
+    padding: 10px;
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    max-width: 620px;
+}
+
+.badge-gif {
+    mix-blend-mode: multiply;
+    max-width: 19px;
+}
+
+.display-lg{
+    margin: 25px 0px 25px 0px;
+}
+
+.body-lg{
+   margin: 0;
+   line-height: 1.6
+}
+
+.hero__buttons{
+    margin-top: 25px;
+}
+
+.btn{
+   margin-right: 20px;
+}
+
+.hero__image {
+    height: 620px;
+    width: 600px;
+    object-fit: cover; /* Isso impede que a imagem amasse */
+    margin-top: 50px;
+    border-radius: 12px; /* Opcional: deixa as bordas arredondadas e mais elegantes */
+}
+
+/*2. O CONTEXTO BRASILEIRO E NÚMEROS*/
+
+.contexto{
+    background-color: var( --color-surface-container-lowest);
+}                 
+
+.contexto-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.section-tag{
+    color: var( --color-primary);
+    font-size: var(--text-body-lg-size);
+    font-weight: var( --text-body-lg-weight);
+}
