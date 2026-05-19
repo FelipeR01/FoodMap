@@ -1,0 +1,400 @@
+/* ══════════════════════════════════════════
+   Layout Principal e Coluna da Esquerda
+══════════════════════════════════════════ */
+
+.contato-section {
+    padding-block: var(--space-xxl);
+}
+
+.contato-section .container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Coluna esquerda menor, direita maior */
+    gap: var(--space-xxl);
+    align-items: start;
+}
+
+.first {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl); /* Espaçamento entre os blocos da esquerda */
+}
+
+.first-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-display-lg-size);
+    font-weight: var(--text-display-lg-weight);
+    line-height: var(--text-display-lg-height);
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-sm);
+}
+
+.first-description {
+    font-size: var(--text-body-lg-size);
+    line-height: var(--text-body-lg-height);
+    color: var(--color-on-surface-variant);
+    max-width: 400px;
+}
+
+/* --- Cards de contato --- */
+.contatos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    font-style: normal;
+}
+
+.contatos {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-xl);
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    transition: box-shadow 0.2s ease;
+}
+
+.contatos:hover {
+    box-shadow: var(--shadow-card-hover);
+}
+
+.contatos-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-label-md-size);
+    font-weight: 600;
+    color: var(--color-on-surface);
+}
+
+.contatos-email {
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+}
+
+.contatos-email a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.contatos-email a:hover {
+    text-decoration: underline;
+}
+
+.contatos-information {
+    font-size: var(--text-label-sm-size);
+    color: var(--color-on-surface-variant);
+}
+
+/* --- Bloco Nosso Compromisso --- */
+.compromisso {
+    background-color: var(--color-primary);
+    border-radius: var(--radius-xl);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.compromisso::after {
+    content: '';
+    position: absolute;
+    right: -24px;
+    bottom: -24px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.compromisso-subtitle {
+    font-size: var(--text-label-sm-size);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary-fixed);
+    margin-bottom: var(--space-sm);
+}
+
+.compromisso-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-headline-md-size);
+    font-weight: var(--text-headline-md-weight);
+    color: var(--color-on-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.compromisso-description {
+    font-size: var(--text-label-md-size);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+/* ══════════════════════════════════════════
+   Formulário (Coluna da Direita)
+══════════════════════════════════════════ */
+
+.forms {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-xl);
+    box-shadow: var(--shadow-card);
+}
+
+.forms h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-headline-md-size);
+    font-weight: var(--text-headline-md-weight);
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+}
+
+/* --- Labels e Inputs --- */
+label {
+    font-family: var(--font-sans);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    color: var(--color-on-surface);
+}
+
+.obrigatorio {
+    color: var(--color-primary);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: var(--text-body-md-size);
+    color: var(--color-on-surface);
+    background-color: var(--color-surface-container-lowest);
+    border: 1.5px solid var(--color-outline-variant);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    min-height: 44px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+textarea::placeholder {
+    color: var(--color-outline);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 107, 48, 0.10);
+}
+
+/* --- Select com seta --- */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.select-arrow {
+    position: absolute;
+    right: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--color-on-surface-variant);
+    font-size: 16px;
+}
+
+/* --- Outros campos do formulário --- */
+textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: var(--text-body-md-height);
+}
+
+.form-group small {
+    font-size: var(--text-label-sm-size);
+    color: var(--color-on-surface-variant);
+    line-height: 1.4;
+}
+
+.contador {
+    text-align: right;
+}
+
+.checkbox-group {
+    margin-block: var(--space-md);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-label-sm-size);
+    color: var(--color-on-surface-variant);
+    line-height: 1.6;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.checkbox-label a {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+button[type="submit"] {
+    width: 100%;
+    min-height: 48px;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font-family: var(--font-sans);
+    font-size: var(--text-label-md-size);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+button[type="submit"]:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-1px);
+}
+
+
+/* ══════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════ */
+
+.faq-section {
+    padding-block: var(--space-xxl);
+    border-top: 1px solid var(--color-outline-variant);
+}
+
+.faq-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-headline-lg-size);
+    font-weight: var(--text-headline-lg-weight);
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-xl);
+}
+
+.question {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-md);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+
+.question:hover {
+    box-shadow: var(--shadow-card-hover);
+}
+
+.question[open] {
+    box-shadow: var(--shadow-card-hover);
+}
+
+.question-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-body-lg-size);
+    font-weight: 600;
+    color: var(--color-on-surface);
+    padding: var(--space-lg);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    user-select: none;
+}
+
+.question-title::-webkit-details-marker {
+    display: none;
+}
+
+.question-title::after {
+    content: '+';
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.question[open] .question-title::after {
+    transform: rotate(45deg);
+}
+
+.question-description {
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-height);
+    color: var(--color-on-surface-variant);
+    padding: 0 var(--space-lg) var(--space-lg);
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: var(--space-lg);
+}
+
+
+/* ══════════════════════════════════════════
+   Responsivo
+══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+    .contato-section .container {
+        grid-template-columns: 1fr;
+    }
+
+    .first-description {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .forms {
+        padding: var(--space-lg);
+    }
+
+    .first-title {
+        font-size: 38px;
+    }
+}
