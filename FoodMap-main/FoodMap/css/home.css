@@ -1,5 +1,4 @@
-
-*{
+* {
     box-sizing: border-box;
 }
 
@@ -11,11 +10,12 @@
     align-items: center;
 }
 
-.hero{
-    background-color: var(--color-background); 
+.hero {
+    background-color: var(--color-background);
     /* Como a section ocupa 100% da tela, a cor vai de ponta a ponta */
-    width: 100%; 
-    min-height: 750px; /* Alterado de height para min-height para melhorar a responsividade */
+    width: 100%;
+    min-height: 750px;
+    /* Alterado de height para min-height para melhorar a responsividade */
     margin-bottom: 80px;
 }
 
@@ -31,45 +31,130 @@
     max-width: 19px;
 }
 
-.display-lg{
+.display-lg {
     margin: 25px 0px 25px 0px;
 }
 
-.body-lg{
-   margin: 0;
-   line-height: 1.6
+.body-lg {
+    margin: 0;
+    line-height: 1.6
 }
 
-.hero__buttons{
+.hero__buttons {
     margin-top: 25px;
 }
 
-.btn{
-   margin-right: 20px;
+.btn {
+    margin-right: 20px;
 }
 
 .hero__image {
     height: 620px;
     width: 600px;
-    object-fit: cover; /* Isso impede que a imagem amasse */
+    object-fit: cover;
+    /* Isso impede que a imagem amasse */
     margin-top: 50px;
-    border-radius: 12px; /* Opcional: deixa as bordas arredondadas e mais elegantes */
+    border-radius: 12px;
+    /* Opcional: deixa as bordas arredondadas e mais elegantes */
 }
 
 /*2. O CONTEXTO BRASILEIRO E NÚMEROS*/
 
-.contexto{
-    background-color: var( --color-surface-container-lowest);
-}                 
+.contexto {
+    background-color: var(--color-surface-container-lowest);
+}
 
-.contexto-section{
+.contexto-section {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.section-tag{
-    color: var( --color-primary);
+
+.section-tag {
+    color: var(--color-primary);
     font-size: var(--text-body-lg-size);
-    font-weight: var( --text-body-lg-weight);
+    font-weight: var(--text-headline-md-weight);
+}
+
+.headline-lg {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.body-lg {
+    text-align: center;
+    font-size: 1.2rem;
+    max-width: 760px;
+    margin: 20px 0px 80px 0px;
+}
+
+/*3 - Faixa Verde com os Números*/
+
+.faixa-estatisticas {
+    background-color: var(--color-primary-fixed);
+    height: 220px;
+    display: flex;
+    /* Garante que o container interno possa ser centralizado */
+    align-items: center;
+    /* Centraliza o conteúdo verticalmente na faixa */
+}
+
+/* Ajustei o nome para bater com o seu HTML (estatisticas__grid) */
+/* 1. A faixa verde define a altura e centraliza o que estiver dentro dela verticalmente */
+.faixa-estatisticas {
+    background-color: var(--color-primary-fixed);
+    height: 240px;
+    display: flex;
+    align-items: center;
+}
+
+/* 2. O container garante que o conteúdo não cole nas bordas da tela */
+.estatisticas__grid {
+    width: 100%;
+}
+
+/* 3. A div .estatisticas é quem realmente espalha os itens */
+.estatisticas {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 4. Cada item individual precisa centralizar o seu próprio texto */
+.estatistica-item {
+    text-align: center;
+    flex: 1;
+}
+
+.display-md{
+    color: var(--color-primary);
+    font-weight: var(--text-display-lg-weight);
+    font-size: var( --text-headline-lg-size);
+}
+
+.label-md{
+    font-size: var( --text-body-md-size);
+}
+
+/*3. ARQUITETURA DE SOLUÇÃO (Como Funciona)*/
+.solucoes{
+    margin-top: 80px;
+}
+.body-lg {
+    text-align: center;
+    max-width: 800px; /* Evita que o texto ocupe a tela toda */
+    margin: 20px auto;    /* Centraliza o parágrafo horizontalmente */
+}
+.solucoes__grid{
+    
+     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+   
+}
+.card-passo{
+   border: 1px solid;
+
 }
