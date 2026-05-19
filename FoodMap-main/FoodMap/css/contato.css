@@ -1,6 +1,26 @@
-/* ══════════════════════════════════════════
-   Layout Principal e Coluna da Esquerda
-══════════════════════════════════════════ */
+/* =====================================================
+   FOODMAP — Contato
+   =====================================================
+
+   ÍNDICE:
+   1. Seção principal (layout duas colunas)
+   2. Coluna esquerda — título e descrição
+   3. Cards de contato
+   4. Bloco "Nosso Compromisso"
+   5. Seção FAQ (acordeão)
+   6. Formulário — card container
+   7. Campos — labels, inputs, select, textarea
+   8. Checkbox LGPD
+   9. Botão de envio
+   10. Responsivo (telas menores)
+   ===================================================== */
+
+
+/* ─────────────────────────────────────────────────────
+   1. SEÇÃO PRINCIPAL
+   O .container vira um grid de 2 colunas:
+   esquerda (informações) | direita (formulário)
+   ───────────────────────────────────────────────────── */
 
 .contato-section {
     padding-block: var(--space-xxl);
@@ -8,15 +28,20 @@
 
 .contato-section .container {
     display: grid;
-    grid-template-columns: 1fr 1.2fr; /* Coluna esquerda menor, direita maior */
+    grid-template-columns: 1fr 1.2fr; /* esquerda menor, direita maior */
     gap: var(--space-xxl);
-    align-items: start;
+    align-items: start; /* cada coluna começa no topo */
 }
+
+
+/* ─────────────────────────────────────────────────────
+   2. COLUNA ESQUERDA — título e descrição
+   ───────────────────────────────────────────────────── */
 
 .first {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xl); /* Espaçamento entre os blocos da esquerda */
+    gap: var(--space-xl); /* espaço entre os blocos internos */
 }
 
 .first-title {
@@ -35,14 +60,20 @@
     max-width: 400px;
 }
 
-/* --- Cards de contato --- */
+
+/* ─────────────────────────────────────────────────────
+   3. CARDS DE CONTATO
+   ───────────────────────────────────────────────────── */
+
+/* Wrapper que empilha os cards verticalmente */
 .contatos-lista {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    font-style: normal;
+    font-style: normal; /* remove o itálico padrão do <address> */
 }
 
+/* Card individual */
 .contatos {
     background-color: var(--color-surface-container-lowest);
     border: 1px solid var(--color-outline-variant);
@@ -84,15 +115,20 @@
     color: var(--color-on-surface-variant);
 }
 
-/* --- Bloco Nosso Compromisso --- */
+
+/* ─────────────────────────────────────────────────────
+   4. BLOCO "NOSSO COMPROMISSO"
+   ───────────────────────────────────────────────────── */
+
 .compromisso {
     background-color: var(--color-primary);
     border-radius: var(--radius-xl);
     padding: var(--space-lg);
-    position: relative;
-    overflow: hidden;
+    position: relative;  /* necessário para o ::after funcionar */
+    overflow: hidden;    /* esconde o círculo decorativo que passa da borda */
 }
 
+/* Círculo decorativo no canto inferior direito */
 .compromisso::after {
     content: '';
     position: absolute;
@@ -128,10 +164,95 @@
 }
 
 
-/* ══════════════════════════════════════════
-   Formulário (Coluna da Direita)
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+   5. SEÇÃO FAQ — acordeão com <details> e <summary>
+   O HTML nativo já abre e fecha sem JavaScript!
+   ───────────────────────────────────────────────────── */
 
+.faq-section {
+    padding-block: var(--space-xxl);
+    border-top: 1px solid var(--color-outline-variant);
+}
+
+.faq-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-headline-lg-size);
+    font-weight: var(--text-headline-lg-weight);
+    color: var(--color-on-surface);
+    margin-bottom: var(--space-xl);
+}
+
+/* Cada <details> é uma pergunta do FAQ */
+.question {
+    background-color: var(--color-surface-container-lowest);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-md);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+}
+
+.question:hover {
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* [open] é adicionado automaticamente pelo navegador quando o <details> está aberto */
+.question[open] {
+    box-shadow: var(--shadow-card-hover);
+}
+
+/* O <summary> é o cabeçalho clicável de cada pergunta */
+.question-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-body-lg-size);
+    font-weight: 600;
+    color: var(--color-on-surface);
+    padding: var(--space-lg);
+    cursor: pointer;
+    list-style: none; /* remove o marcador padrão */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    user-select: none; /* impede selecionar o texto ao clicar */
+}
+
+/* Remove a seta nativa do navegador (Chrome/Safari) */
+.question-title::-webkit-details-marker {
+    display: none;
+}
+
+/* Ícone "+" no lado direito */
+.question-title::after {
+    content: '+';
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+/* Quando aberto, o "+" gira 45° e vira um "×" */
+.question[open] .question-title::after {
+    transform: rotate(45deg);
+}
+
+/* Texto da resposta */
+.question-description {
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-height);
+    color: var(--color-on-surface-variant);
+    padding: 0 var(--space-lg) var(--space-lg);
+    border-top: 1px solid var(--color-outline-variant);
+    padding-top: var(--space-lg);
+}
+
+
+/* ─────────────────────────────────────────────────────
+   6. FORMULÁRIO — card container
+   ───────────────────────────────────────────────────── */
+
+/* O card branco que envolve todo o formulário */
 .forms {
     background-color: var(--color-surface-container-lowest);
     border: 1px solid var(--color-outline-variant);
@@ -148,6 +269,7 @@
     margin-bottom: var(--space-lg);
 }
 
+/* Agrupa: label + campo + texto de apoio */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -155,13 +277,18 @@
     margin-bottom: var(--space-md);
 }
 
+/* Coloca dois .form-group lado a lado (e-mail e telefone) */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
 }
 
-/* --- Labels e Inputs --- */
+
+/* ─────────────────────────────────────────────────────
+   7. CAMPOS — labels, inputs, select, textarea
+   ───────────────────────────────────────────────────── */
+
 label {
     font-family: var(--font-sans);
     font-size: var(--text-label-md-size);
@@ -169,10 +296,12 @@ label {
     color: var(--color-on-surface);
 }
 
+/* Asterisco verde nos campos obrigatórios */
 .obrigatorio {
     color: var(--color-primary);
 }
 
+/* Estilo base compartilhado por todos os campos */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -187,12 +316,13 @@ textarea {
     border-radius: var(--radius-md);
     padding: var(--space-sm) var(--space-md);
     min-height: 44px;
-    outline: none;
+    outline: none; /* remove a borda azul padrão do navegador */
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    appearance: none;
-    -webkit-appearance: none;
+    appearance: none;         /* remove estilos nativos do navegador */
+    -webkit-appearance: none; /* mesma coisa para Safari */
 }
 
+/* Cor do texto de exemplo dentro dos campos */
 input[type="text"]::placeholder,
 input[type="email"]::placeholder,
 input[type="tel"]::placeholder,
@@ -200,6 +330,7 @@ textarea::placeholder {
     color: var(--color-outline);
 }
 
+/* Borda verde e brilho suave quando o campo está ativo */
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus,
@@ -209,50 +340,63 @@ textarea:focus {
     box-shadow: 0 0 0 3px rgba(0, 107, 48, 0.10);
 }
 
-/* --- Select com seta --- */
+/* Select: o wrapper permite posicionar a seta customizada */
 .select-wrapper {
     position: relative;
 }
 
 .select-wrapper select {
-    padding-right: 40px;
+    padding-right: 40px; /* abre espaço para a seta não sobrepor o texto */
     cursor: pointer;
 }
 
+/* Seta do select (elemento <span> no HTML) */
 .select-arrow {
     position: absolute;
     right: var(--space-md);
     top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
+    transform: translateY(-50%); /* centraliza verticalmente */
+    pointer-events: none;        /* o clique passa através dela para o select */
     color: var(--color-on-surface-variant);
     font-size: 16px;
 }
 
-/* --- Outros campos do formulário --- */
+/* Textarea maior e redimensionável verticalmente */
 textarea {
     min-height: 140px;
     resize: vertical;
     line-height: var(--text-body-md-height);
 }
 
+/* Texto pequeno de apoio abaixo dos campos */
 .form-group small {
     font-size: var(--text-label-sm-size);
     color: var(--color-on-surface-variant);
     line-height: 1.4;
 }
 
+/* Contador de caracteres — alinhado à direita */
 .contador {
     text-align: right;
+    display: block;
+    font-size: var(--text-label-sm-size);
+    color: var(--color-outline);
+    margin-top: 2px;
 }
+
+
+/* ─────────────────────────────────────────────────────
+   8. CHECKBOX LGPD
+   ───────────────────────────────────────────────────── */
 
 .checkbox-group {
     margin-block: var(--space-md);
 }
 
+/* Label que envolve o checkbox + texto */
 .checkbox-label {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* alinha o checkbox com a primeira linha do texto */
     gap: var(--space-sm);
     font-size: var(--text-label-sm-size);
     color: var(--color-on-surface-variant);
@@ -263,10 +407,10 @@ textarea {
 
 .checkbox-label input[type="checkbox"] {
     width: 16px;
-    min-width: 16px;
+    min-width: 16px; /* impede que o checkbox encolha */
     height: 16px;
-    margin-top: 2px;
-    accent-color: var(--color-primary);
+    margin-top: 2px; /* alinha melhor com a primeira linha de texto */
+    accent-color: var(--color-primary); /* cor da bolinha quando marcado */
     cursor: pointer;
 }
 
@@ -274,6 +418,11 @@ textarea {
     color: var(--color-primary);
     text-decoration: underline;
 }
+
+
+/* ─────────────────────────────────────────────────────
+   9. BOTÃO DE ENVIO
+   ───────────────────────────────────────────────────── */
 
 button[type="submit"] {
     width: 100%;
@@ -291,90 +440,19 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     box-shadow: var(--shadow-card-hover);
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* efeito de "levantar" ao passar o mouse */
+}
+
+button[type="submit"]:active {
+    transform: translateY(0); /* volta ao lugar ao clicar */
 }
 
 
-/* ══════════════════════════════════════════
-   FAQ
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+   10. RESPONSIVO — adaptações para telas menores
+   ───────────────────────────────────────────────────── */
 
-.faq-section {
-    padding-block: var(--space-xxl);
-    border-top: 1px solid var(--color-outline-variant);
-}
-
-.faq-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-headline-lg-size);
-    font-weight: var(--text-headline-lg-weight);
-    color: var(--color-on-surface);
-    margin-bottom: var(--space-xl);
-}
-
-.question {
-    background-color: var(--color-surface-container-lowest);
-    border: 1px solid var(--color-outline-variant);
-    border-radius: var(--radius-xl);
-    margin-bottom: var(--space-md);
-    overflow: hidden;
-    transition: box-shadow 0.2s ease;
-}
-
-.question:hover {
-    box-shadow: var(--shadow-card-hover);
-}
-
-.question[open] {
-    box-shadow: var(--shadow-card-hover);
-}
-
-.question-title {
-    font-family: var(--font-sans);
-    font-size: var(--text-body-lg-size);
-    font-weight: 600;
-    color: var(--color-on-surface);
-    padding: var(--space-lg);
-    cursor: pointer;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-md);
-    user-select: none;
-}
-
-.question-title::-webkit-details-marker {
-    display: none;
-}
-
-.question-title::after {
-    content: '+';
-    font-size: 24px;
-    font-weight: 300;
-    color: var(--color-primary);
-    flex-shrink: 0;
-    transition: transform 0.25s ease;
-}
-
-.question[open] .question-title::after {
-    transform: rotate(45deg);
-}
-
-.question-description {
-    font-size: var(--text-body-md-size);
-    line-height: var(--text-body-md-height);
-    color: var(--color-on-surface-variant);
-    padding: 0 var(--space-lg) var(--space-lg);
-    border-top: 1px solid var(--color-outline-variant);
-    padding-top: var(--space-lg);
-}
-
-
-/* ══════════════════════════════════════════
-   Responsivo
-══════════════════════════════════════════ */
-
+/* Tablet (~900px): as duas colunas viram uma só */
 @media (max-width: 900px) {
     .contato-section .container {
         grid-template-columns: 1fr;
@@ -385,6 +463,7 @@ button[type="submit"]:hover {
     }
 }
 
+/* Mobile (~767px): e-mail e telefone empilham verticalmente */
 @media (max-width: 767px) {
     .form-row {
         grid-template-columns: 1fr;
