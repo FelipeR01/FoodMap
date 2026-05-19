@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodMap - Como Funciona</title>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/como-funciona.css">
+</head>
+
+<body>
+    <div id="nav-bar">
+        <!-- Conteúdo da barra de navegação via JavaScript -->
+    </div>
+
+    <main>
+        <!-- Primeiro título -->
+        <section class="first">
+            <div class="container">
+                <h1 class="first-title">Como o FoodMap Funciona</h1>
+                <p>Conectamos doadores e receptores por geolocalização de forma simples, rápida e acessível para
+                    qualquer pessoa.</p>
+                <img class="first-img" src="../assets/imagem-hover.png" alt="Ilustração de como funciona o FoodMap">
+            </div>
+        </section>
+
+        <!-- Informações -->
+        <section class="info">
+            <!-- Trocado de div para article para maior valor semântico -->
+            <article class="algoritmo">
+                <h2 class="algoritmo-title">1. Algoritmo de Matching Inteligente</h2>
+                <p class="algoritmo-descricao">Nosso motor de busca conecta quem quer ajudar com quem precisa de forma
+                    otimizada. O sistema analisa a proximidade geográfica e a compatibilidade entre a oferta e a demanda
+                    em tempo real.</p>
+                <ul class="algoritmo-lista">
+                    <li>Mapeamento geoespacial em tempo real.</li>
+                    <li>Sugestão automática do melhor par doador-receptor.</li>
+                    <li>Filtro por tipo de alimento: perecível, não perecível, refeição pronta e hortifrúti.</li>
+                </ul>
+                <img class="algoritmo-img" src="#"
+                    alt="Ilustração de mapa digital representando o algoritmo de matching">
+            </article>
+
+            <article class="status">
+                <h2 class="status-title">2. Status e Rastreabilidade da Doação</h2>
+                <p class="status-descricao">Acompanhe todo o processo de doação com transparência total. O fluxo segue o
+                    ciclo vital do alimento desde a disponibilização até a chegada ao destino final, garantindo que o
+                    impacto seja concretizado.</p>
+                <ul class="status-lista">
+                    <li>Ciclo rastreável: Disponível → Em Rota → Entregue.</li>
+                    <li>Atualização de status em tempo real para ambas as partes.</li>
+                    <li>Confirmação digital de recebimento e histórico completo de doações.</li>
+                </ul>
+                <img class="status-img" src="#" alt="Ilustração de celular mostrando o ciclo de status da doação">
+            </article>
+
+            <article class="cadastro">
+                <h2 class="cadastro-title">3. Cadastro de Doador e Receptor</h2>
+                <p class="cadastro-descricao">Nossa plataforma é aberta e inclusiva. O cadastro é simples e rápido para
+                    que todos possam participar do combate ao desperdício, seja você uma pessoa física, uma empresa ou
+                    uma instituição social.</p>
+                <ul class="cadastro-lista">
+                    <li>Cadastro de doador: tipo, quantidade, validade e horário disponível.</li>
+                    <li>Cadastro de receptor: endereço, perfil de atendimento e capacidade.</li>
+                    <li>Área dedicada para voluntários de transporte e apoio logístico.</li>
+                </ul>
+                <img class="cadastro-img" src="#" alt="Ilustração de formulário de cadastro de doador e receptor">
+            </article>
+        </section>
+
+        <!-- CTA Final -->
+        <section class="jornada">
+            <div class="jornada-conteiner">
+                <h2 class="jornada-title">Pronto para fazer parte desta rede de impacto?</h2>
+                <p class="jornada-descricao">Escolha como você quer começar sua jornada no FoodMap. Juntos podemos
+                    transformar excedentes em alimento na mesa de quem precisa.</p>
+                <div class="hero__cta">
+                    <a href="cadastro-doador.html" class="btn btn-primary">Quero Cadastrar uma Doação</a>
+                    <a href="mapa.html" class="btn btn-outline">Quero Encontrar Doações Perto de Mim</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Corrigido de h1 para span -->
+        <span class="footer-title">FOODMAP</span>
+        <ul class="footer-nav">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="mapa.html">Mapa de Doações</a></li>
+            <li><a href="como-funciona.html">Como Funciona</a></li>
+            <li><a href="sobre-nos.html">Sobre Nós</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+        <p class="footer-direitos">© 2026 FoodMap. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>
