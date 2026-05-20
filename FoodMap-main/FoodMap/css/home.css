@@ -138,23 +138,67 @@
 }
 
 /*3. ARQUITETURA DE SOLUÇÃO (Como Funciona)*/
-.solucoes{
+/* ===================================================== */
+.solucoes {
     margin-top: 80px;
 }
+
 .body-lg {
     text-align: center;
-    max-width: 800px; /* Evita que o texto ocupe a tela toda */
-    margin: 20px auto;    /* Centraliza o parágrafo horizontalmente */
+    margin: 16px auto;
+    max-width: 700px;
 }
-.solucoes__grid{
-    
-     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-   
-}
-.card-passo{
-   border: 1px solid;
 
+.solucoes__grid {
+    display: flex;
+    justify-content: center; /* Centraliza o grupo de cards */
+    gap: 24px;
+    align-items: stretch;
 }
+
+.card-passo {
+    /* flex: 1; foi removido */
+    width: 100%; /* Garante que o card seja responsivo dentro do limite */
+    max-width: 400px; /* Defina a largura máxima que você quer para cada card */
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 12px;
+    padding: 20px;
+    background-color: var(--color-surface-container-lowest);
+    transition: box-shadow 0.2s ease;
+}
+
+
+.card-passo:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.card-passo__numero {
+    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-serif);
+    margin-bottom: 16px;
+}
+
+.card-passo__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0.1;
+    padding-block: 16px;
+}
+
+.headline-sm {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.body-md {
+    font-size: 14px;
+    color: var(--color-on-surface-variant);
+    line-height: 1.5;
+    }
