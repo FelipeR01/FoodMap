@@ -1,100 +1,90 @@
 /* =====================================================
    FOODMAP — Contato
    Responsável por: contador de caracteres,
-   filtro do telefone e envio de e-mail via EmailJS
+   filtro de telefone com DDD automático e envio via EmailJS
    ===================================================== */
-
 
 /* ─────────────────────────────────────────────────────
    CONFIGURAÇÃO DO EMAILJS
    Substitua os três valores abaixo pelos seus.
-
-   Como obter cada ID:
-   1. Crie conta gratuita em https://www.emailjs.com
-   2. Email Services → Add Service → Gmail
-      → conecte contatofoodmap@gmail.com
-      → copie o "Service ID" gerado
-   3. Email Templates → Create Template
-      → monte o template (veja o modelo abaixo)
-      → copie o "Template ID"
-   4. Account → API Keys → copie a "Public Key"
    ───────────────────────────────────────────────────── */
 const EMAILJS_SERVICE_ID  = 'service_u4ney8j';   /* ex: 'service_abc123'  */
 const EMAILJS_TEMPLATE_ID = 'template_k2wne6f';  /* ex: 'template_xyz789' */
 const EMAILJS_PUBLIC_KEY  = 'nv3s-_Yg4znxbqFdX';   /* ex: 'AbCdEfGhIjKlMn'  */
 
-
 /* ─────────────────────────────────────────────────────
-   Aguarda a página carregar completamente antes
-   de executar qualquer código JavaScript
+   Aguarda a página carregar completamente antes de rodar
    ───────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', function () {
 
-
-    /* -------------------------------------------------
-       1. FILTRO DO CAMPO TELEFONE
-       Remove letras em tempo real conforme o usuário digita.
-       Só deixa passar: números, espaços, ( ) e -
-       ------------------------------------------------- */
-    const campoTelefone = document.getElementById('telefone');
-
-    if (campoTelefone) {
-        campoTelefone.addEventListener('input', function () {
-            /* Tudo que NÃO for dígito, espaço, parêntese ou hífen é apagado */
-            campoTelefone.value = campoTelefone.value.replace(/[^\d\s()\-]/g, '');
-        });
+    // Inicializa o EmailJS com sua chave pública. ESSENCIAL PARA FUNCIONAR.
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
     }
 
-
     /* -------------------------------------------------
-       2. CONTADOR DE CARACTERES DA MENSAGEM
-       Atualiza "0 / 500" enquanto o usuário digita.
-       Muda de cor verde (aviso) e vermelho (limite).
+       1. FILTRO E MÁSCARA AUTOMÁTICA DO TELEFONE
+       Formata como (XX) XXXXX-XXXX dinamicamente
        ------------------------------------------------- */
-    const campoMensagem = document.getElementById('mdetalhada');
-    const textoContador = document.querySelector('.contador');
+    const campoTelefone = document.getElementById('telefone');
+    if (campoTelefone) {
+        campoTelefone.addEventListener('input', function (e) {
+            let valor = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+            
+            valor = valor.substring(0, 11); // Limita ao máximo de 11 dígitos
 
-    if (campoMensagem && textoContador) {
-        campoMensagem.addEventListener('input', function () {
-            const total = campoMensagem.value.length;
-
-            textoContador.textContent = total + ' / 500';
-
-            if (total >= 490) {
-                textoContador.style.color = 'var(--color-error)';    /* vermelho */
-            } else if (total >= 450) {
-                textoContador.style.color = 'var(--color-primary)';  /* verde    */
+            // Aplica a formatação do DDD com parênteses e hífen conforme digita
+            if (valor.length > 0) {
+                if (valor.length <= 2) {
+                    e.target.value = `(${valor}`;
+                } else if (valor.length <= 6) {
+                    e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2)}`;
+                } else {
+                    e.target.value = `(${valor.substring(0, 2)}) ${valor.substring(2, 7)}-${valor.substring(7)}`;
+                }
             } else {
-                textoContador.style.color = 'var(--color-outline)';  /* cinza    */
+                e.target.value = '';
             }
         });
     }
 
+    /* -------------------------------------------------
+       2. CONTADOR DE CARACTERES DA MENSAGEM
+       Adiciona classes para controle de cor via CSS externo
+       ------------------------------------------------- */
+    const campoMensagem = document.getElementById('mdetalhada');
+    const textoContador = document.querySelector('.contador');
+    if (campoMensagem && textoContador) {
+        campoMensagem.addEventListener('input', function () {
+            const total = campoMensagem.value.length;
+            textoContador.textContent = total + ' / 500';
+
+            // Remove classes anteriores para atualizar o estado
+            textoContador.classList.remove('limite-aviso', 'limite-perigo');
+
+            if (total >= 490) {
+                textoContador.classList.add('limite-perigo'); // Adiciona classe que pode ser estilizada no seu CSS
+            } else if (total >= 450) {
+                textoContador.classList.add('limite-aviso');  // Adiciona classe que pode ser estilizada no seu CSS
+            }
+        });
+    }
 
     /* -------------------------------------------------
-       3. ENVIO DO FORMULÁRIO VIA EMAILJS
-       Intercepta o clique em "Enviar Solicitação Oficial",
-       coleta os dados e manda para contatofoodmap@gmail.com
-       sem precisar de nenhum servidor próprio.
+       3. ENVIO DO FORMULÁRIO VIA EMAILJS USANDO SWEETALERT2
        ------------------------------------------------- */
     const formulario  = document.querySelector('.forms form');
     const botaoEnviar = document.querySelector('button[type="submit"]');
 
     if (formulario && botaoEnviar) {
-
         formulario.addEventListener('submit', function (evento) {
-
-            /* Impede o navegador de recarregar a página ao clicar em enviar */
             evento.preventDefault();
 
-            /* Desativa o botão para evitar envios duplicados enquanto aguarda */
-            botaoEnviar.disabled    = true;
+            // Desativa o botão para evitar cliques duplicados
+            botaoEnviar.disabled = true;
             botaoEnviar.textContent = 'Enviando…';
 
-            /* Coleta o valor de cada campo.
-               Os nomes das chaves (from_name, from_email…) precisam ser
-               EXATAMENTE iguais às variáveis do seu template no EmailJS.
-               Ex: no template escreva {{from_name}}, {{from_email}}, etc. */
+            // Coleta os dados do form
             const dadosDoEmail = {
                 from_name  : document.getElementById('name').value,
                 from_email : document.getElementById('email').value,
@@ -103,50 +93,43 @@ document.addEventListener('DOMContentLoaded', function () {
                 mensagem   : document.getElementById('mdetalhada').value,
             };
 
-            /* Chama o EmailJS para fazer o envio.
-               .then() roda se der certo, .catch() roda se der erro. */
-            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, dadosDoEmail, EMAILJS_PUBLIC_KEY)
-
+            // Envia via EmailJS
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, dadosDoEmail)
                 .then(function () {
-                    /* ✅ Envio bem-sucedido */
-                    botaoEnviar.textContent           = '✓ Mensagem enviada com sucesso!';
-                    botaoEnviar.style.backgroundColor = 'var(--color-primary-container)';
-                    botaoEnviar.style.color           = 'var(--color-on-primary-container)';
+                    /* ✅ Envio bem-sucedido - Dispara Alerta do SweetAlert2 */
+                    Swal.fire({
+                        title: 'Mensagem Enviada!',
+                        text: 'Sua solicitação oficial foi enviada. Entraremos em contato em até 24h úteis.',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    });
 
-                    /* Limpa o formulário e o contador */
+                    // Limpa o formulário e reseta o contador
                     formulario.reset();
                     if (textoContador) {
                         textoContador.textContent = '0 / 500';
-                        textoContador.style.color = 'var(--color-outline)';
+                        textoContador.className = 'contador';
                     }
 
-                    /* Após 4 segundos volta o botão ao estado original */
-                    setTimeout(function () {
-                        botaoEnviar.disabled              = false;
-                        botaoEnviar.textContent           = 'Enviar Solicitação Oficial ➤';
-                        botaoEnviar.style.backgroundColor = '';
-                        botaoEnviar.style.color           = '';
-                    }, 4000);
+                    // Restaura o botão imediatamente
+                    botaoEnviar.disabled = false;
+                    botaoEnviar.textContent = 'Enviar Solicitação Oficial ➤';
                 })
-
                 .catch(function (erro) {
-                    /* ❌ Algo deu errado (sem internet, IDs errados, etc.) */
+                    /* ❌ Erro no envio - Dispara Alerta de Erro do SweetAlert2 */
                     console.error('Erro EmailJS:', erro);
+                    
+                    Swal.fire({
+                        title: 'Erro ao Enviar',
+                        text: 'Não foi possível completar o envio. Por favor, tente novamente.',
+                        icon: 'error',
+                        confirmButtonText: 'Tentar Novamente'
+                    });
 
-                    botaoEnviar.textContent           = '✗ Erro ao enviar. Tente novamente.';
-                    botaoEnviar.style.backgroundColor = 'var(--color-error)';
-                    botaoEnviar.style.color           = '#fff';
-
-                    /* Reativa o botão após 4 segundos */
-                    setTimeout(function () {
-                        botaoEnviar.disabled              = false;
-                        botaoEnviar.textContent           = 'Enviar Solicitação Oficial ➤';
-                        botaoEnviar.style.backgroundColor = '';
-                        botaoEnviar.style.color           = '';
-                    }, 4000);
+                    // Restaura o botão para nova tentativa
+                    botaoEnviar.disabled = false;
+                    botaoEnviar.textContent = 'Enviar Solicitação Oficial ➤';
                 });
         });
     }
-
-
 }); /* fim do DOMContentLoaded */
