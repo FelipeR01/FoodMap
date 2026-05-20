@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodMap - Mapa de Doações</title>
+    <link rel="stylesheet" href="../css/tokens.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/mapa.css" />
+  </head>
+
+  <body>
+    <header id="nav-bar">
+      <!-- navbar carregada pelo navbar.js -->
+    </header>
+
+    <main>
+      <!-- titulo da pagina -->
+      <section class="mapa-hero">
+        <div class="container">
+          <h1 class="mapa-hero-titulo">
+            <img src="../assets/radar_23152.png" alt="Ícone do título" />
+            Inteligência Logística e Distribuição
+          </h1>
+          <p class="mapa-hero-descricao">
+            Nossa plataforma de geolocalização processa dados em tempo real para
+            otimizar o fluxo de doações alimentares. Monitoramos áreas de
+            vulnerabilidade crítica e conectamos excedentes com precisão,
+            garantindo que os recursos cheguem onde são mais necessários,
+            minimizando perdas logísticas e maximizando o impacto social.
+          </p>
+        </div>
+      </section>
+      <!-- mapa + painel -->
+      <section class="mapa-conteudo">
+        <div class="container mapa-grid">
+          <!-- lado esquerdo: só o mapa -->
+          <div class="mapa-lado-esquerdo">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.913441644419!2d-46.57438068500109!3d-23.68281698467295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a9c8e7b8b9%3A0x9c8e7b8b9c8e7b8!2sInstitui%C3%A7%C3%A3o%20Beneficente%20Casa%20do%20Menor%20Carente%20-%20IBCMC!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+              class="mapa-iframe"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mapa de doações FoodMap"
+            ></iframe>
+          </div>
+
+          <!-- lado direito: painel logistico -->
+          <aside class="painel">
+            <div class="painel-cabecalho">
+              <h2 class="painel-titulo">Painel Logístico</h2>
+              <span class="painel-badge">142 Registros</span>
+            </div>
+            <p class="painel-subtitulo">
+              Análise de oportunidades e demandas na sua região metropolitana.
+            </p>
+
+            <!-- card de instrucoes -->
+            <div class="painel-instrucoes">
+              <p class="instrucoes-titulo">Como utilizar os dados</p>
+              <ul class="instrucoes-lista">
+                <li>
+                  Cruze informações de disponibilidade utilizando os filtros
+                  superiores.
+                </li>
+                <li>
+                  Verifique o <strong>Status de Validação</strong> nos perfis
+                  das instituições para garantir a confiabilidade.
+                </li>
+                <li>
+                  Priorize cards sinalizados como
+                  <strong class="texto-urgente">Urgentes</strong> para maximizar
+                  a eficácia do socorro imediato.
+                </li>
+              </ul>
+            </div>
+
+            <!-- lista de doações -->
+            <div class="painel-lista" id="painel-lista">
+              <!-- card normal -->
+              <article class="card-doacao" data-tipo="doador">
+                <div class="card-header">
+                  <div class="card-info">
+                    <div>
+                      <h3 class="card-nome">
+                        <img src="../assets/restaurante.png" alt="" /> Refeições
+                        Prontas
+                      </h3>
+                      <p class="card-origem">Restaurante Sabor Bom</p>
+                    </div>
+                  </div>
+                  <span class="card-update">Atualizado há 2h</span>
+                </div>
+                <div class="card-metricas">
+                  <div class="card-metrica">
+                    <p class="metrica-label">HISTÓRICO DE IMPACTO</p>
+                    <p class="metrica-valor">1.2k+ doações concluídas</p>
+                  </div>
+                  <div class="card-metrica">
+                    <p class="metrica-label">ÍNDICE DE CONFIABILIDADE</p>
+                    <p class="metrica-valor metrica-verde">
+                      98% (Alta Reputação)
+                    </p>
+                  </div>
+                </div>
+                <div class="card-rodape">
+                  <span class="tag tag-verde">Volume: 15 marmitas</span>
+                  <span class="tag tag-cinza">Consumo imediato</span>
+                  <span class="card-distancia">Distância: 1.2 km</span>
+                </div>
+              </article>
+
+              <!-- card urgente -->
+              <article class="card-doacao card-urgente" data-tipo="urgente">
+                <div class="card-header">
+                  <div class="card-info">
+                    <div>
+                      <h3 class="card-nome">
+                        <img
+                          src="../assets/relacionamento-com-o-cliente.png"
+                          alt=""
+                        />
+                        Itens de Cesta Básica
+                      </h3>
+                      <p class="card-origem">Abrigo Esperança</p>
+                    </div>
+                  </div>
+                  <span class="tag tag-vermelho">ALERTA CRITICO</span>
+                </div>
+                <div class="card-alerta">
+                  <p class="alerta-label">ESPECIFICAÇÕES DA DEMANDA</p>
+                  <p class="alerta-texto">
+                    Déficit projetado para os próximos 3 dias. Necessidade
+                    estrita de:
+                    <strong>Arroz (50kg), Feijão (20kg) e Óleo (15L)</strong>
+                    para sustentação de 50 famílias cadastradas.
+                  </p>
+                </div>
+                <div class="card-rodape">
+                  <span class="tag tag-cinza">Não perecíveis apenas</span>
+                  <span class="card-distancia">Distância: 5.0 km</span>
+                </div>
+              </article>
+
+              <!-- card normal -->
+              <article class="card-doacao" data-tipo="doador">
+                <div class="card-header">
+                  <div class="card-info">
+                    <div>
+                      <h3 class="card-nome">
+                        <img src="../assets/salada.png" alt="" /> Hortaliças e
+                        Verduras
+                      </h3>
+                      <p class="card-origem">Hortifrúti Central</p>
+                    </div>
+                  </div>
+                  <span class="card-update">Atualizado há 4h</span>
+                </div>
+                <div class="card-metricas">
+                  <div class="card-metrica">
+                    <p class="metrica-label">HISTÓRICO DE IMPACTO</p>
+                    <p class="metrica-valor">340+ doações concluídas</p>
+                  </div>
+                  <div class="card-metrica">
+                    <p class="metrica-label">ÍNDICE DE CONFIABILIDADE</p>
+                    <p class="metrica-valor metrica-verde">
+                      87% (Boa Reputação)
+                    </p>
+                  </div>
+                </div>
+                <div class="card-rodape">
+                  <span class="tag tag-verde">Volume: 30kg</span>
+                  <span class="tag tag-cinza">Retirada hoje</span>
+                  <span class="card-distancia">Distância: 2.8 km</span>
+                </div>
+              </article>
+
+              <!-- card normal -->
+              <article class="card-doacao" data-tipo="doador">
+                <div class="card-header">
+                  <div class="card-info">
+                    <div>
+                      <h3 class="card-nome">
+                        <img src="../assets/pao.png" alt="" /> Pães e Frios
+                      </h3>
+                      <p class="card-origem">Padaria União</p>
+                    </div>
+                  </div>
+                  <span class="card-update">Atualizado há 1h</span>
+                </div>
+                <div class="card-metricas">
+                  <div class="card-metrica">
+                    <p class="metrica-label">HISTÓRICO DE IMPACTO</p>
+                    <p class="metrica-valor">890+ doações concluídas</p>
+                  </div>
+                  <div class="card-metrica">
+                    <p class="metrica-label">ÍNDICE DE CONFIABILIDADE</p>
+                    <p class="metrica-valor metrica-verde">
+                      94% (Alta Reputação)
+                    </p>
+                  </div>
+                </div>
+                <div class="card-rodape">
+                  <span class="tag tag-verde">Volume: 8kg</span>
+                  <span class="tag tag-cinza">Consumo imediato</span>
+                  <span class="card-distancia">Distância: 0.7 km</span>
+                </div>
+              </article>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer bg-inverse">
+      <span class="footer-title">FOODMAP</span>
+      <ul class="footer-nav">
+        <li><a href="../index.html">Início</a></li>
+        <li><a href="mapa.html">Mapa de Doações</a></li>
+        <li><a href="como-funciona.html">Como Funciona</a></li>
+        <li><a href="sobre-nos.html">Sobre Nós</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <p class="footer-direitos">
+        © 2026 FoodMap. Todos os direitos reservados.
+      </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="../js/contato.js"></script>
+  </body>
+</html>
