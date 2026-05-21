@@ -1,26 +1,43 @@
+/* ===================================================== */
+/* 0. ESTILOS GERAIS E DE BASE */
+/* ===================================================== */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container para centralizar o conteúdo dentro das seções */
+.container {
+    width: 100%;
+    max-width: 1280px; /* Largura máxima do conteúdo no desktop */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;  /* Espaçamento nas laterais para telas móveis */
+    padding-right: 20px;
+}
+
+
+/* ===================================================== */
+/* 1. HERO SECTION */
+/* ===================================================== */
+.hero {
+    background-color: var(--color-background);
+    width: 100%;
+    min-height: 750px;
+    margin-bottom: 100px;
+    display: flex;
+    align-items: center;
 }
 
 .secao {
-    margin-top: 80px;
     flex: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.hero {
-    background-color: var(--color-background);
-    /* Como a section ocupa 100% da tela, a cor vai de ponta a ponta */
-    width: 100%;
-    min-height: 750px;
-    /* Alterado de height para min-height para melhorar a responsividade */
-    margin-bottom: 80px;
-}
-
 .hero__content {
-    padding: 10px;
     font-size: var(--text-label-md-size);
     font-weight: var(--text-label-md-weight);
     max-width: 620px;
@@ -37,7 +54,7 @@
 
 .body-lg {
     margin: 0;
-    line-height: 1.6
+    line-height: 1.6;
 }
 
 .hero__buttons {
@@ -52,16 +69,16 @@
     height: 620px;
     width: 600px;
     object-fit: cover;
-    /* Isso impede que a imagem amasse */
     margin-top: 50px;
     border-radius: 12px;
-    /* Opcional: deixa as bordas arredondadas e mais elegantes */
 }
 
-/*2. O CONTEXTO BRASILEIRO E NÚMEROS*/
-
+/* ===================================================== */
+/* 2. O CONTEXTO BRASILEIRO E NÚMEROS */
+/* ===================================================== */
 .contexto {
     background-color: var(--color-surface-container-lowest);
+    padding-bottom: 80px;
 }
 
 .contexto-section {
@@ -82,85 +99,77 @@
     margin-top: 20px;
 }
 
-.body-lg {
+/* Corpo do texto com largura controlada */
+.contexto-descricao {
     text-align: center;
     font-size: 1.2rem;
-    max-width: 760px;
-    margin: 20px 0px 80px 0px;
+    max-width: 850px; /* Largura do parágrafo ajustada */
+    margin: 20px auto  auto; /* Centraliza o bloco de texto */
 }
 
-/*3 - Faixa Verde com os Números*/
-
+/* ===================================================== */
+/* 3. FAIXA VERDE COM OS NÚMEROS */
+/* ===================================================== */
 .faixa-estatisticas {
     background-color: var(--color-primary-fixed);
-    height: 220px;
-    display: flex;
-    /* Garante que o container interno possa ser centralizado */
-    align-items: center;
-    /* Centraliza o conteúdo verticalmente na faixa */
-}
-
-/* Ajustei o nome para bater com o seu HTML (estatisticas__grid) */
-/* 1. A faixa verde define a altura e centraliza o que estiver dentro dela verticalmente */
-.faixa-estatisticas {
-    background-color: var(--color-primary-fixed);
-    height: 240px;
     display: flex;
     align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    min-height: 300px;
+    height: auto;
+    margin-top: 100px;
 }
 
-/* 2. O container garante que o conteúdo não cole nas bordas da tela */
 .estatisticas__grid {
     width: 100%;
 }
 
-/* 3. A div .estatisticas é quem realmente espalha os itens */
 .estatisticas {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    gap: 20px;
 }
 
-/* 4. Cada item individual precisa centralizar o seu próprio texto */
 .estatistica-item {
     text-align: center;
     flex: 1;
 }
 
-.display-md{
+.display-md {
     color: var(--color-primary);
     font-weight: var(--text-display-lg-weight);
     font-size: var( --text-headline-lg-size);
 }
 
-.label-md{
+.label-md {
     font-size: var( --text-body-md-size);
 }
 
-/*3. ARQUITETURA DE SOLUÇÃO (Como Funciona)*/
-/* ===================================================== */
-.solucoes {
-    margin-top: 80px;
-}
 
-.body-lg {
+/* ===================================================== */
+/* 4. ARQUITETURA DE SOLUÇÃO (COMO FUNCIONA) */
+/* ===================================================== */
+
+.arquitetura-descricao {
     text-align: center;
-    margin: 16px auto;
-    max-width: 700px;
+    font-size: 1.2rem;
+    max-width: 850px; /* Largura do parágrafo ajustada */
+    margin: 20px auto 30px auto; /* Centraliza o bloco de texto */
 }
 
 .solucoes__grid {
+    flex: 3;
     display: flex;
-    justify-content: center; /* Centraliza o grupo de cards */
+    justify-content: space-between;
     gap: 24px;
-    align-items: stretch;
 }
 
 .card-passo {
-    /* flex: 1; foi removido */
-    width: 100%; /* Garante que o card seja responsivo dentro do limite */
-    max-width: 400px; /* Defina a largura máxima que você quer para cada card */
-    height: 400px;
+    width: 100%;
+    max-width: 400px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--color-outline-variant);
@@ -170,17 +179,15 @@
     transition: box-shadow 0.2s ease;
 }
 
-
 .card-passo:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 12px rgba(0,0,0,0.09);
 }
 
 .card-passo__numero {
     color: var(--color-primary);
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 700;
     font-family: var(--font-serif);
-    margin-bottom: 16px;
 }
 
 .card-passo__icon {
@@ -188,11 +195,13 @@
     justify-content: center;
     align-items: center;
     flex-grow: 0.1;
-    padding-block: 16px;
+    padding-block: 12px;
+    height: 48px;
+    width: 39px;
 }
 
 .headline-sm {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
 }
@@ -201,4 +210,71 @@
     font-size: 14px;
     color: var(--color-on-surface-variant);
     line-height: 1.5;
+    max-width: 360px;
+}
+
+
+/* ===================================================== */
+/* 5. MEDIA QUERIES PARA RESPONSIVIDADE (TABLETS E CELULARES) */
+/* Estilos aplicados quando a tela é de 768px ou menor */
+/* ===================================================== */
+@media screen and (max-width: 768px) {
+    /* 1. Hero Section */
+    .secao {
+        flex-direction: column; /* Empilha o texto e a imagem */
+        text-align: center;
     }
+
+    .hero__image {
+        width: 100%; /* Imagem ocupa a largura total */
+        height: 350px;
+        margin-top: 40px;
+        order: -1; /* Manda a imagem para cima do texto */
+    }
+
+    .hero__content {
+        max-width: 100%;
+    }
+
+    .hero__buttons {
+        display: flex;
+        flex-direction: column; /* Botões um embaixo do outro */
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn {
+        margin-right: 0;
+        width: 80%; /* Largura maior para facilitar o toque */
+    }
+
+    /* 2. Estatísticas */
+    .faixa-estatisticas {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    
+    .estatisticas {
+        flex-direction: column; /* Empilha os números */
+        gap: 40px; /* Aumenta o espaçamento vertical */
+    }
+
+    /* 3. Soluções (Cards) */
+    .solucoes__grid {
+        flex-direction: column; /* Empilha os cards */
+        align-items: center; /* Centraliza os cards empilhados */
+    }
+
+    .card-passo {
+        min-height: auto; /* Deixa o conteúdo ditar a altura */
+    }
+
+    /* 4. Tipografia */
+    .headline-lg {
+        font-size: 2.5rem; /* Diminui um pouco o título principal */
+    }
+
+    .body-lg.contexto__body {
+        font-size: 1rem; /* Diminui o texto do corpo */
+    }
+}
