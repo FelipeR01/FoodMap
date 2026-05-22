@@ -10,10 +10,12 @@
 /* Container para centralizar o conteúdo dentro das seções */
 .container {
     width: 100%;
-    max-width: 1280px; /* Largura máxima do conteúdo no desktop */
+    max-width: 1280px;
+    /* Largura máxima do conteúdo no desktop */
     margin-left: auto;
     margin-right: auto;
-    padding-left: 20px;  /* Espaçamento nas laterais para telas móveis */
+    padding-left: 20px;
+    /* Espaçamento nas laterais para telas móveis */
     padding-right: 20px;
 }
 
@@ -103,8 +105,10 @@
 .contexto-descricao {
     text-align: center;
     font-size: 1.2rem;
-    max-width: 850px; /* Largura do parágrafo ajustada */
-    margin: 20px auto  auto; /* Centraliza o bloco de texto */
+    max-width: 850px;
+    /* Largura do parágrafo ajustada */
+    margin: 20px auto auto;
+    /* Centraliza o bloco de texto */
 }
 
 /* ===================================================== */
@@ -140,11 +144,11 @@
 .display-md {
     color: var(--color-primary);
     font-weight: var(--text-display-lg-weight);
-    font-size: var( --text-headline-lg-size);
+    font-size: var(--text-headline-lg-size);
 }
 
 .label-md {
-    font-size: var( --text-body-md-size);
+    font-size: var(--text-body-md-size);
 }
 
 
@@ -155,8 +159,10 @@
 .arquitetura-descricao {
     text-align: center;
     font-size: 1.2rem;
-    max-width: 850px; /* Largura do parágrafo ajustada */
-    margin: 20px auto 30px auto; /* Centraliza o bloco de texto */
+    max-width: 850px;
+    /* Largura do parágrafo ajustada */
+    margin: 20px auto 30px auto;
+    /* Centraliza o bloco de texto */
 }
 
 .solucoes__grid {
@@ -180,7 +186,7 @@
 }
 
 .card-passo:hover {
-    box-shadow: 0 10px 12px rgba(0,0,0,0.09);
+    box-shadow: 0 10px 12px rgba(0, 0, 0, 0.09);
 }
 
 .card-passo__numero {
@@ -219,17 +225,21 @@
 /* Estilos aplicados quando a tela é de 768px ou menor */
 /* ===================================================== */
 @media screen and (max-width: 768px) {
+
     /* 1. Hero Section */
     .secao {
-        flex-direction: column; /* Empilha o texto e a imagem */
+        flex-direction: column;
+        /* Empilha o texto e a imagem */
         text-align: center;
     }
 
     .hero__image {
-        width: 100%; /* Imagem ocupa a largura total */
+        width: 100%;
+        /* Imagem ocupa a largura total */
         height: 350px;
         margin-top: 40px;
-        order: -1; /* Manda a imagem para cima do texto */
+        order: -1;
+        /* Manda a imagem para cima do texto */
     }
 
     .hero__content {
@@ -238,14 +248,16 @@
 
     .hero__buttons {
         display: flex;
-        flex-direction: column; /* Botões um embaixo do outro */
+        flex-direction: column;
+        /* Botões um embaixo do outro */
         align-items: center;
         gap: 15px;
     }
 
     .btn {
         margin-right: 0;
-        width: 80%; /* Largura maior para facilitar o toque */
+        width: 80%;
+        /* Largura maior para facilitar o toque */
     }
 
     /* 2. Estatísticas */
@@ -253,28 +265,111 @@
         padding-top: 60px;
         padding-bottom: 60px;
     }
-    
+
     .estatisticas {
-        flex-direction: column; /* Empilha os números */
-        gap: 40px; /* Aumenta o espaçamento vertical */
+        flex-direction: column;
+        /* Empilha os números */
+        gap: 40px;
+        /* Aumenta o espaçamento vertical */
     }
 
     /* 3. Soluções (Cards) */
     .solucoes__grid {
-        flex-direction: column; /* Empilha os cards */
-        align-items: center; /* Centraliza os cards empilhados */
+        flex-direction: column;
+        /* Empilha os cards */
+        align-items: center;
+        /* Centraliza os cards empilhados */
     }
 
     .card-passo {
-        min-height: auto; /* Deixa o conteúdo ditar a altura */
+        min-height: auto;
+        /* Deixa o conteúdo ditar a altura */
     }
 
     /* 4. Tipografia */
     .headline-lg {
-        font-size: 2.5rem; /* Diminui um pouco o título principal */
+        font-size: 2.5rem;
+        /* Diminui um pouco o título principal */
     }
 
     .body-lg.contexto__body {
-        font-size: 1rem; /* Diminui o texto do corpo */
+        font-size: 1rem;
+        /* Diminui o texto do corpo */
     }
+}
+
+/*=====================================================
+4. IMPACTO REAL (FUNDO VERDE)
+======================================================*/
+.impacto {
+    margin-top: 100px;
+    background-image: url('../assets/imagem-de-fundo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.descricao-impacto {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.titulo-impacto {
+    padding: 30px 0 0;
+}
+
+.impacto__grid {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1150px;
+    /* Usar max-width torna o layout responsivo */
+    width: 100%;
+    /* Garante que ocupe a largura disponível até o máximo */
+    margin: 110px auto 0;
+    /* 140px em cima, 0 embaixo, e 'auto' nas laterais para centralizar */
+}
+
+.card-depoimento {
+    background-color: var(--color-background);
+    width: 100%;
+    /* Ocupa a largura disponível */
+    max-width: 500px;
+    /* Limita a largura máxima */
+    max-height: auto;
+    gap: 20px;
+    background-color: #FFFFFF;
+    border-radius: 16px;
+}
+
+.card-depoimento:hover {
+    box-shadow: 0 10px 12px rgba(0, 0, 0, 0.4);
+}
+
+.card-depoimento__perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.titulo-card-carlos {
+    margin: 20px;
+}
+
+.titulo-card-pessoas {
+    
+    align-items: center;
+}
+
+.perfil__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* Deixa a imagem redonda */
+    object-fit: cover;
+    margin: 20px ;
+    flex-shrink: 0;
+
 }
