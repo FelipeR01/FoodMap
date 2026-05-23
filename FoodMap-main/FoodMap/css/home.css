@@ -1,5 +1,5 @@
 /* ===================================================== */
-/* 0. ESTILOS GERAIS E DE BASE */
+/* 0. ESTILOS GERAIS E DE BASE                             */
 /* ===================================================== */
 * {
     box-sizing: border-box;
@@ -11,32 +11,30 @@
 .container {
     width: 100%;
     max-width: 1280px;
-    /* Largura máxima do conteúdo no desktop */
     margin-left: auto;
     margin-right: auto;
     padding-left: 20px;
-    /* Espaçamento nas laterais para telas móveis */
     padding-right: 20px;
 }
 
-
 /* ===================================================== */
-/* 1. HERO SECTION */
+/* 1. HERO SECTION                                       */
 /* ===================================================== */
 .hero {
     background-color: var(--color-background);
     width: 100%;
-    min-height: 750px;
+    padding-top: 60px;
+    padding-bottom: 60px;
     margin-bottom: 100px;
     display: flex;
     align-items: center;
 }
 
 .secao {
-    flex: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 40px;
 }
 
 .hero__content {
@@ -51,7 +49,7 @@
 }
 
 .display-lg {
-    margin: 25px 0px 25px 0px;
+    margin: 25px 0px;
 }
 
 .body-lg {
@@ -61,26 +59,24 @@
 
 .hero__buttons {
     margin-top: 25px;
-}
-
-.btn {
-    margin-right: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .hero__image {
     height: 620px;
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
     object-fit: cover;
-    margin-top: 50px;
     border-radius: 12px;
 }
 
 /* ===================================================== */
-/* 2. O CONTEXTO BRASILEIRO E NÚMEROS */
+/* 2. O CONTEXTO BRASILEIRO E NÚMEROS                    */
 /* ===================================================== */
 .contexto {
     background-color: var(--color-surface-container-lowest);
-    padding-bottom: 80px;
+    padding: 80px 0;
 }
 
 .contexto-section {
@@ -101,32 +97,22 @@
     margin-top: 20px;
 }
 
-/* Corpo do texto com largura controlada */
 .contexto-descricao {
     text-align: center;
     font-size: 1.2rem;
     max-width: 850px;
-    /* Largura do parágrafo ajustada */
-    margin: 20px auto auto;
-    /* Centraliza o bloco de texto */
+    margin: 20px auto 0;
 }
 
 /* ===================================================== */
-/* 3. FAIXA VERDE COM OS NÚMEROS */
+/* 3. FAIXA VERDE COM OS NÚMEROS                         */
 /* ===================================================== */
 .faixa-estatisticas {
     background-color: var(--color-primary-fixed);
     display: flex;
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    min-height: 300px;
-    height: auto;
+    padding: 60px 0;
     margin-top: 100px;
-}
-
-.estatisticas__grid {
-    width: 100%;
 }
 
 .estatisticas {
@@ -151,24 +137,23 @@
     font-size: var(--text-body-md-size);
 }
 
-
 /* ===================================================== */
-/* 4. ARQUITETURA DE SOLUÇÃO (COMO FUNCIONA) */
+/* 4. ARQUITETURA DE SOLUÇÃO (COMO FUNCIONA)             */
 /* ===================================================== */
+.solucoes {
+    padding: 80px 0;
+}
 
 .arquitetura-descricao {
     text-align: center;
     font-size: 1.2rem;
     max-width: 850px;
-    /* Largura do parágrafo ajustada */
-    margin: 20px auto 30px auto;
-    /* Centraliza o bloco de texto */
+    margin: 20px auto 60px auto;
 }
 
 .solucoes__grid {
-    flex: 3;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     gap: 24px;
 }
 
@@ -180,7 +165,7 @@
     flex-direction: column;
     border: 1px solid var(--color-outline-variant);
     border-radius: 12px;
-    padding: 20px;
+    padding: 24px;
     background-color: var(--color-surface-container-lowest);
     transition: box-shadow 0.2s ease;
 }
@@ -200,10 +185,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 0.1;
-    padding-block: 12px;
-    height: 48px;
-    width: 39px;
+    padding: 12px 0;
+    height: 60px;
+    width: 43px;
+    object-fit:fill;
 }
 
 .headline-sm {
@@ -219,27 +204,106 @@
     max-width: 360px;
 }
 
+/* ===================================================== */
+/* 5. IMPACTO REAL (FUNDO VERDE)                        */
+/* ===================================================== */
+.impacto {
+    padding: 80px 0;
+    margin-top: 100px;
+    background-image: url('../assets/imagem-de-fundo.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 100px;
+}
+
+.titulo-impacto,
+.descricao-impacto {
+    text-align: center;
+}
+
+.descricao-impacto {
+    max-width: 850px;
+    margin: 20px auto 60px auto;
+}
+
+.impacto__grid {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Alinha os cards pelo topo e estica para mesma altura */
+    gap: 24px;
+}
+
+.card-depoimento {
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: box-shadow 0.2s ease;
+}
+
+.depoimento__texto {
+    flex-grow: 1; /* Força o texto a ocupar o espaço vertical */
+}
+
+.card-depoimento:hover {
+    box-shadow: 0 10px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-depoimento__perfil {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.perfil__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.titulo-depoimento, .label-md {
+    margin: 0;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.card-depoimento__tags {
+    display: flex;
+    gap: 8px;
+}
+
+.badge--small {
+    background-color: #E9F5E9;
+    color: #1E8449;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
 
 /* ===================================================== */
-/* 5. MEDIA QUERIES PARA RESPONSIVIDADE (TABLETS E CELULARES) */
-/* Estilos aplicados quando a tela é de 768px ou menor */
+/* 6. MEDIA QUERIES PARA RESPONSIVIDADE                  */
 /* ===================================================== */
 @media screen and (max-width: 768px) {
-
-    /* 1. Hero Section */
+    /* --- 1. Hero Section --- */
     .secao {
         flex-direction: column;
-        /* Empilha o texto e a imagem */
         text-align: center;
     }
 
     .hero__image {
         width: 100%;
-        /* Imagem ocupa a largura total */
         height: 350px;
-        margin-top: 40px;
         order: -1;
-        /* Manda a imagem para cima do texto */
     }
 
     .hero__content {
@@ -247,9 +311,7 @@
     }
 
     .hero__buttons {
-        display: flex;
         flex-direction: column;
-        /* Botões um embaixo do outro */
         align-items: center;
         gap: 15px;
     }
@@ -257,119 +319,39 @@
     .btn {
         margin-right: 0;
         width: 80%;
-        /* Largura maior para facilitar o toque */
+        text-align: center;
     }
 
-    /* 2. Estatísticas */
+    /* --- 2. Estatísticas --- */
     .faixa-estatisticas {
-        padding-top: 60px;
-        padding-bottom: 60px;
+        padding: 60px 0;
     }
 
     .estatisticas {
         flex-direction: column;
-        /* Empilha os números */
         gap: 40px;
-        /* Aumenta o espaçamento vertical */
     }
 
-    /* 3. Soluções (Cards) */
+    /* --- 3. Soluções (Cards) --- */
     .solucoes__grid {
         flex-direction: column;
-        /* Empilha os cards */
         align-items: center;
-        /* Centraliza os cards empilhados */
     }
 
     .card-passo {
         min-height: auto;
-        /* Deixa o conteúdo ditar a altura */
     }
 
-    /* 4. Tipografia */
+    /* --- 4. Impacto Real (Depoimentos) --- */
+    .impacto__grid {
+        flex-direction: column; /* Empilha os cards de depoimento */
+        align-items: center;
+    }
+
+    /* --- 5. Tipografia --- */
     .headline-lg {
-        font-size: 2.5rem;
-        /* Diminui um pouco o título principal */
-    }
-
-    .body-lg.contexto__body {
-        font-size: 1rem;
-        /* Diminui o texto do corpo */
+        font-size: 2.2rem;
     }
 }
 
-/*=====================================================
-4. IMPACTO REAL (FUNDO VERDE)
-======================================================*/
-.impacto {
-    margin-top: 100px;
-    background-image: url('../assets/imagem-de-fundo.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
 
-.descricao-impacto {
-    margin-top: 10px;
-    margin-bottom: 30px;
-}
-
-.titulo-impacto {
-    padding: 30px 0 0;
-}
-
-.impacto__grid {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1150px;
-    /* Usar max-width torna o layout responsivo */
-    width: 100%;
-    /* Garante que ocupe a largura disponível até o máximo */
-    margin: 110px auto 0;
-    /* 140px em cima, 0 embaixo, e 'auto' nas laterais para centralizar */
-}
-
-.card-depoimento {
-    background-color: var(--color-background);
-    width: 100%;
-    /* Ocupa a largura disponível */
-    max-width: 500px;
-    /* Limita a largura máxima */
-    max-height: auto;
-    gap: 20px;
-    background-color: #FFFFFF;
-    border-radius: 16px;
-}
-
-.card-depoimento:hover {
-    box-shadow: 0 10px 12px rgba(0, 0, 0, 0.4);
-}
-
-.card-depoimento__perfil {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-}
-
-.titulo-card-carlos {
-    margin: 20px;
-}
-
-.titulo-card-pessoas {
-    
-    align-items: center;
-}
-
-.perfil__avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    /* Deixa a imagem redonda */
-    object-fit: cover;
-    margin: 20px ;
-    flex-shrink: 0;
-
-}
