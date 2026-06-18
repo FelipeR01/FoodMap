@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/mapa.css" />
+
+    <!-- Leaflet: biblioteca de mapas (CSS) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
   </head>
 
   <body>
@@ -33,19 +39,25 @@
           </p>
         </div>
       </section>
+      <!-- barra de filtros -->
+      <section class="mapa-filtros">
+        <div class="container filtros-bar">
+          <div class="filtros-botoes">
+            <button class="filtro-btn filtro-btn-ativo" data-filtro="todos">
+              Todos
+            </button>
+            <button class="filtro-btn" data-filtro="doador">Doadores</button>
+            <button class="filtro-btn" data-filtro="urgente">Urgentes</button>
+          </div>
+        </div>
+      </section>
+
       <!-- mapa + painel -->
       <section class="mapa-conteudo">
         <div class="container mapa-grid">
-          <!-- lado esquerdo: só o mapa -->
+          <!-- lado esquerdo: o mapa Leaflet -->
           <div class="mapa-lado-esquerdo">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.913441644419!2d-46.57438068500109!3d-23.68281698467295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a9c8e7b8b9%3A0x9c8e7b8b9c8e7b8!2sInstitui%C3%A7%C3%A3o%20Beneficente%20Casa%20do%20Menor%20Carente%20-%20IBCMC!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
-              class="mapa-iframe"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Mapa de doações FoodMap"
-            ></iframe>
+            <div id="mapa" class="mapa-iframe"></div>
           </div>
 
           <!-- lado direito: painel logistico -->
@@ -228,8 +240,9 @@
         © 2026 FoodMap. Todos os direitos reservados.
       </p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="../js/contato.js"></script>
+    <!-- Leaflet: biblioteca de mapas (JavaScript) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="../components/navbar.js"></script>
+    <script src="../js/mapa.js"></script>
   </body>
 </html>
