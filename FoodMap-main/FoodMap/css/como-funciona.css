@@ -86,7 +86,7 @@
     background-position: center;
 }
 
-.algoritmo h2::before { background-image: url("../assets/notificaçao-icon.png"); }
+.algoritmo h2::before { background-image: url("../assets/notificacao-icon.png"); }
 .status h2::before { background-image: url("../assets/radar-transparente-icon.png"); }
 .cadastro h2::before { background-image: url("../assets/grupo.png"); }
 

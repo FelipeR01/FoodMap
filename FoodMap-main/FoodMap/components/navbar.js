@@ -20,7 +20,7 @@
         <li><a href="${root}index.html"                   data-page="index">Início</a></li>
         <li><a href="${root}${pages}como-funciona.html"   data-page="como-funciona">Como Funciona</a></li>
         <li><a href="${root}${pages}mapa.html"            data-page="mapa">Mapa</a></li>
-        <li><a href="${root}${pages}sobre.html"       data-page="sobre">Sobre</a></li>
+        <li><a href="${root}${pages}Sobre.html"       data-page="sobre">Sobre</a></li> 
         <li><a href="${root}${pages}contato.html"         data-page="contato">Fale Conosco</a></li>
       </ul>
 
