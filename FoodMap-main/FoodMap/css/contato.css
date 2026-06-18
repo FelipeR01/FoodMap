@@ -1,6 +1,6 @@
-/* =====================================================
+/* 
    FOODMAP — Contato
-   =====================================================
+ 
 
    ÍNDICE:
    1. Seção principal (layout duas colunas)
@@ -13,14 +13,12 @@
    8. Checkbox LGPD
    9. Botão de envio
    10. Responsivo (telas menores)
-   ===================================================== */
+   */
 
 
-/* ─────────────────────────────────────────────────────
-   1. SEÇÃO PRINCIPAL
+/*  1. SEÇÃO PRINCIPAL
    O .container vira um grid de 2 colunas:
-   esquerda (informações) | direita (formulário)
-   ───────────────────────────────────────────────────── */
+   esquerda (informações) | direita (formulário)*/
 
 .contato-section {
     padding-block: var(--space-xxl);
@@ -34,9 +32,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
-   2. COLUNA ESQUERDA — título e descrição
-   ───────────────────────────────────────────────────── */
+/* 2. COLUNA ESQUERDA — título e descrição*/
 
 .first {
     display: flex;
@@ -61,9 +57,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
-   3. CARDS DE CONTATO
-   ───────────────────────────────────────────────────── */
+/* 3. CARDS DE CONTATO */
 
 /* Wrapper que empilha os cards verticalmente */
 .contatos-lista {
@@ -116,9 +110,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
-   4. BLOCO "NOSSO COMPROMISSO"
-   ───────────────────────────────────────────────────── */
+/*4. BLOCO "NOSSO COMPROMISSO"*/
 
 .compromisso {
     background-color: var(--color-primary);
@@ -164,10 +156,8 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
-   5. SEÇÃO FAQ — acordeão com <details> e <summary>
-   O HTML nativo já abre e fecha sem JavaScript!
-   ───────────────────────────────────────────────────── */
+/* 5. SEÇÃO FAQ — acordeão com <details> e <summary>
+   O HTML nativo já abre e fecha sem JavaScript!*/
 
 .faq-section {
     padding-block: var(--space-xxl);
@@ -248,9 +238,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
-   6. FORMULÁRIO — card container
-   ───────────────────────────────────────────────────── */
+/*    6. FORMULÁRIO — card container*/
 
 /* O card branco que envolve todo o formulário */
 .forms {
@@ -285,9 +273,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
-   7. CAMPOS — labels, inputs, select, textarea
-   ───────────────────────────────────────────────────── */
+/*  7. CAMPOS — labels, inputs, select, textarea+*/
 
 label {
     font-family: var(--font-sans);
@@ -385,9 +371,7 @@ textarea {
 }
 
 
-/* ─────────────────────────────────────────────────────
-   8. CHECKBOX LGPD
-   ───────────────────────────────────────────────────── */
+/*  8. CHECKBOX LGPD */
 
 .checkbox-group {
     margin-block: var(--space-md);
@@ -420,9 +404,7 @@ textarea {
 }
 
 
-/* ─────────────────────────────────────────────────────
-   9. BOTÃO DE ENVIO
-   ───────────────────────────────────────────────────── */
+/* 9. BOTÃO DE ENVIO*/
 
 button[type="submit"] {
     width: 100%;
@@ -448,9 +430,7 @@ button[type="submit"]:active {
 }
 
 
-/* ─────────────────────────────────────────────────────
-   10. RESPONSIVO — adaptações para telas menores
-   ───────────────────────────────────────────────────── */
+/* 10. RESPONSIVO — adaptações para telas menores*/
 
 /* Tablet (~900px): as duas colunas viram uma só */
 @media (max-width: 900px) {
@@ -476,4 +456,18 @@ button[type="submit"]:active {
     .first-title {
         font-size: 38px;
     }
+}
+/* VALIDAÇÃO — borda vermelha e mensagem de erro*/
+.campo-invalido {
+  border-color: var(--color-error) !important;
+  box-shadow: 0 0 0 3px rgba(186, 26, 26, 0.10);
+}
+
+.mensagem-erro {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-size: var(--text-label-sm-size);
+  font-weight: 500;
+  color: var(--color-error);
 }
