@@ -1,16 +1,4 @@
-/* =====================================================
-   FOODMAP — Mapa de Doações
-   Responsável por:
-   - Inicializar o mapa Leaflet
-   - Desenhar marcadores clicáveis a partir dos dados
-   - Filtrar marcadores E cards ao mesmo tempo (Todos / Doadores / Urgentes)
-   ===================================================== */
 
-/* ─────────────────────────────────────────────────────
-   1. OS DADOS
-   Cada objeto é um ponto no mapa. No futuro, isso virá de
-   um cadastro real; por enquanto são dados de demonstração.
-   ───────────────────────────────────────────────────── */
 const pontos = [
   {
     id: 1,
@@ -66,8 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /*3. CRIA OS MARCADORES A PARTIR DOS DADOS
      Para cada ponto, cria um marcador clicável no mapa.
-     Guardamos o marcador junto do seu tipo, para filtrar depois.
-     --------------------------------------------------- */
+     Guardamos o marcador junto do seu tipo, para filtrar depois. */
   const marcadores = []; // vai guardar { tipo, marker }
 
   pontos.forEach(function (ponto) {
@@ -91,12 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
     marcadores.push({ tipo: ponto.tipo, marker: marker });
   });
 
-  /* ---------------------------------------------------
-     4. O FILTRO
+  /*  4. O FILTRO
      Pega todos os botões de filtro e os cards do painel.
      Ao clicar num botão, mostra/esconde marcadores e cards
-     que combinam com o filtro escolhido.
-     --------------------------------------------------- */
+     que combinam com o filtro escolhido. */
   const botoes = document.querySelectorAll(".filtro-btn");
   const cards = document.querySelectorAll(".card-doacao");
 
