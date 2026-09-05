@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
 /* =====================================================
@@ -14,6 +14,14 @@ import { NavLink, Link } from 'react-router-dom'
 export default function Navbar() {
   // Controla se o menu do celular está aberto ou fechado
   const [aberto, setAberto] = useState(false)
+  const [temaEscuro, setTemaEscuro] = useState(function () {
+    return localStorage.getItem('foodmap-theme') === 'dark'
+  })
+
+  useEffect(function () {
+    document.documentElement.dataset.theme = temaEscuro ? 'dark' : 'light'
+    localStorage.setItem('foodmap-theme', temaEscuro ? 'dark' : 'light')
+  }, [temaEscuro])
 
   // Fecha o menu ao clicar em qualquer link (igual ao site antigo)
   function fecharMenu() {
@@ -58,6 +66,18 @@ export default function Navbar() {
         <Link to="/cadastro-doador" className="navbar__cta" onClick={fecharMenu}>
           Quero Doar
         </Link>
+
+        <button
+          className="navbar__theme-toggle"
+          type="button"
+          aria-label={temaEscuro ? 'Ativar tema claro' : 'Ativar tema escuro'}
+          title={temaEscuro ? 'Ativar tema claro' : 'Ativar tema escuro'}
+          onClick={function () {
+            setTemaEscuro(!temaEscuro)
+          }}
+        >
+          {temaEscuro ? '☀' : '☾'}
+        </button>
 
         <button
           className="navbar__toggle"
