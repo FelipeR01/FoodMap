@@ -1,0 +1,40 @@
+.sobre-page { padding-top: 32px; }
+.sobre-hero { max-width: 1280px; margin: 0 auto; padding: 10px 20px; display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: auto auto 1fr; gap: 24px 20px; align-items: start; }
+.image-hero { grid-column: 1; grid-row: 1 / 4; align-self: stretch; min-height: 560px; }
+.image-hero img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+.ods { grid-column: 2; grid-row: 1; padding: 50px; border: 1px solid #dcfce7; border-radius: 16px; background: #f0fdf4; text-align: center; }
+.ods .display-lg { margin: 0; color: #166534; }
+.ods-paragrafo { margin-top: 8px; color: #404040; font-weight: 600; }
+.nosso-manifesto { grid-column: 2; grid-row: 2; }
+.title-manifesto { margin-bottom: 16px; color: var(--color-on-surface); font-family: var(--font-serif); font-size: 2rem; line-height: 1.25; }
+.paragrafo-manifesto { color: #525252; font-size: 1.1rem; line-height: 1.7; }
+.paragrafo-manifesto + .paragrafo-manifesto { margin-top: 1em; }
+.compromisso-agenda { grid-column: 2; grid-row: 3; padding: 24px; border: 1px solid #e5e5e5; border-radius: 16px; background: #fafafa; }
+.compromisso-agenda p { font-size: 1rem; line-height: 1.6; }
+.desafio { margin-top: 100px; padding: 100px 20px; background: var(--color-secondary-container); text-align: center; }
+.texto-desafio h2, .transparencia-heading { color: var(--color-on-surface); font-family: var(--font-serif); font-size: 2.2rem; }
+.descricao-desafio { margin: 16px auto 60px; color: #525252; font-size: 1.1rem; }
+.sobre-cards { max-width: 1280px; margin: 0 auto 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.sobre-card { padding: 32px 24px; border: 1px solid #e5e5e5; border-radius: 16px; background: #fafafa; }
+.card-imagem { height: 48px; margin: 0 auto 16px; object-fit: contain; }
+.card-titulo { margin-bottom: 8px; color: #166534; font-size: 2.5rem; }
+.card-descricao { color: #404040; font-size: 1rem; line-height: 1.6; }
+.dado { max-width: 900px; margin: 40px auto 0; color: #737373; font-size: .9rem; }
+.transparencia { padding: 100px 20px; background: #f0fdf4; }
+.transparencia-textos { max-width: 800px; margin: 0 auto 60px; text-align: center; }
+.transparencia-intro { margin-top: 16px; color: #525252; font-size: 1.1rem; line-height: 1.7; }
+.transparencia-cards { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.transparencia-card { padding: 32px; border: 1px solid #dcfce7; border-radius: 16px; background: #fff; text-align: center; }
+.transparencia-image { height: 54px; margin: 0 auto 20px; object-fit: contain; }
+.transparencia-card h3 { margin-bottom: 12px; color: var(--color-on-surface); font-family: var(--font-serif); font-size: 1.5rem; }
+.transparencia-card p { color: #525252; font-size: 1rem; line-height: 1.6; }
+.frase { margin-bottom: 80px; padding: 100px 20px; background: var(--color-secondary); text-align: center; }
+.frase-destaque { max-width: 700px; margin: 0 auto; color: #fff; font-size: 2.5rem; font-weight: 700; line-height: 1.3; }
+[data-theme='dark'] .ods { background: var(--color-surface-container); border-color: var(--color-outline-variant); }
+[data-theme='dark'] .ods .display-lg, [data-theme='dark'] .card-titulo { color: var(--color-primary); }
+[data-theme='dark'] .ods-paragrafo, [data-theme='dark'] .paragrafo-manifesto, [data-theme='dark'] .card-descricao, [data-theme='dark'] .transparencia-intro, [data-theme='dark'] .transparencia-card p { color: var(--color-on-surface-variant); }
+[data-theme='dark'] .compromisso-agenda, [data-theme='dark'] .sobre-card { background: var(--color-surface-container-lowest); border-color: var(--color-outline-variant); }
+[data-theme='dark'] .transparencia { background: var(--color-surface-container-low); }
+[data-theme='dark'] .transparencia-card { background: var(--color-surface-container-lowest); border-color: var(--color-outline-variant); }
+@media (max-width: 900px) { .sobre-hero { display: flex; flex-direction: column; align-items: center; text-align: center; }.image-hero { width: 100%; max-width: 500px; height: 350px; min-height: 0; }.sobre-cards { grid-template-columns: repeat(2, 1fr); }.transparencia-cards { grid-template-columns: 1fr; max-width: 560px; } }
+@media (max-width: 600px) { .sobre-page { padding-top: 16px; }.sobre-cards { grid-template-columns: 1fr; }.title-manifesto, .transparencia-heading, .texto-desafio h2 { font-size: 1.8rem; }.frase-destaque { font-size: 2rem; }.card-titulo { font-size: 2.2rem; } }

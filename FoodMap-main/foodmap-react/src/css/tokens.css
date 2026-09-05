@@ -147,3 +147,31 @@
   --shadow-nav: 0px 1px 0px rgba(0, 0, 0, 0.08);
   /* Sombra/Linha da barra de navegação */
 }
+
+[data-theme='dark'] {
+  --color-background: #101510;
+  --color-surface: #101510;
+  --color-surface-dim: #0b0f0c;
+  --color-surface-bright: #1b211c;
+  --color-surface-container-lowest: #1d241e;
+  --color-surface-container-low: #192019;
+  --color-surface-container: #222b23;
+  --color-surface-container-high: #2a342b;
+  --color-surface-container-highest: #333e34;
+  --color-surface-variant: #333e34;
+  --color-on-surface: #edf2e9;
+  --color-on-surface-variant: #c0cbbf;
+  --color-on-background: #edf2e9;
+  --color-primary: #7bdb8f;
+  --color-on-primary: #06210e;
+  --color-primary-fixed: #97f8a9;
+  --color-secondary-container: #285f38;
+  --color-on-secondary-container: #b1f5b9;
+  --color-outline: #899688;
+  --color-outline-variant: #465347;
+  --color-inverse-surface: #edf2e9;
+  --color-inverse-on-surface: #2c322c;
+  --shadow-card: 0px 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0px 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-nav: 0px 1px 0px rgba(255, 255, 255, 0.08);
+}
