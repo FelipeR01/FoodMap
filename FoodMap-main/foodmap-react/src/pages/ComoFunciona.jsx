@@ -5,7 +5,6 @@ import "../css/como-funciona.css";
 export default function ComoFunciona() {
   return (
     <main>
-      {/* Primeiro título */}
       <section className="first">
         <div className="container">
           <h1 className="first-title">Como o FoodMap Funciona</h1>
@@ -21,7 +20,6 @@ export default function ComoFunciona() {
         </div>
       </section>
 
-      {/* Informações */}
       <section className="info">
         <article className="algoritmo">
           <h2 className="algoritmo-title">
@@ -102,7 +100,6 @@ export default function ComoFunciona() {
         </article>
       </section>
 
-      {/* CTA Final */}
       <section className="jornada">
         <div className="jornada-conteiner">
           <h2 className="jornada-title">

@@ -1,13 +1,10 @@
-/* ===================================================== */
-/* 0. ESTILOS GERAIS E DE BASE                             */
-/* ===================================================== */
+/* Base */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Container para centralizar o conteúdo dentro das seções */
 .container {
     width: 100%;
     max-width: 1280px;
@@ -17,9 +14,7 @@
     padding-right: 20px;
 }
 
-/* ===================================================== */
-/* 1. HERO SECTION                                       */
-/* ===================================================== */
+/* Hero */
 .hero {
     background-color: var(--color-background);
     width: 100%;
@@ -71,9 +66,7 @@
     border-radius: 12px;
 }
 
-/* ===================================================== */
-/* 2. O CONTEXTO BRASILEIRO E NÚMEROS                    */
-/* ===================================================== */
+/* Contexto e estatísticas */
 .contexto {
     background-color: var(--color-surface-container-lowest);
     padding: 80px 0;
@@ -104,9 +97,6 @@
     margin: 20px auto 0;
 }
 
-/* ===================================================== */
-/* 3. FAIXA VERDE COM OS NÚMEROS                         */
-/* ===================================================== */
 .faixa-estatisticas {
     background-color: var(--color-primary-fixed);
     display: flex;
@@ -137,9 +127,7 @@
     font-size: var(--text-body-md-size);
 }
 
-/* ===================================================== */
-/* 4. ARQUITETURA DE SOLUÇÃO (COMO FUNCIONA)             */
-/* ===================================================== */
+/* Solução */
 .solucoes {
     padding: 80px 0;
 }
@@ -204,9 +192,7 @@
     max-width: 360px;
 }
 
-/* ===================================================== */
-/* 5. IMPACTO REAL (FUNDO VERDE)                        */
-/* ===================================================== */
+/* Impacto */
 .impacto {
     padding: 80px 0;
     margin-top: 100px;
@@ -230,7 +216,7 @@
 .impacto__grid {
     display: flex;
     justify-content: center;
-    align-items: stretch; /* Alinha os cards pelo topo e estica para mesma altura */
+    align-items: stretch;
     gap: 24px;
 }
 
@@ -247,7 +233,7 @@
 }
 
 .depoimento__texto {
-    flex-grow: 1; /* Força o texto a ocupar o espaço vertical */
+    flex-grow: 1;
 }
 
 .card-depoimento:hover {
@@ -290,11 +276,8 @@
     font-weight: 600;
 }
 
-/* ===================================================== */
-/* 6. MEDIA QUERIES PARA RESPONSIVIDADE                  */
-/* ===================================================== */
+/* Responsividade */
 @media screen and (max-width: 768px) {
-    /* --- 1. Hero Section --- */
     .secao {
         flex-direction: column;
         text-align: center;
@@ -322,7 +305,6 @@
         text-align: center;
     }
 
-    /* --- 2. Estatísticas --- */
     .faixa-estatisticas {
         padding: 60px 0;
     }
@@ -332,7 +314,6 @@
         gap: 40px;
     }
 
-    /* --- 3. Soluções (Cards) --- */
     .solucoes__grid {
         flex-direction: column;
         align-items: center;
@@ -342,13 +323,11 @@
         min-height: auto;
     }
 
-    /* --- 4. Impacto Real (Depoimentos) --- */
     .impacto__grid {
-        flex-direction: column; /* Empilha os cards de depoimento */
+        flex-direction: column;
         align-items: center;
     }
 
-    /* --- 5. Tipografia --- */
     .headline-lg {
         font-size: 2.2rem;
     }

@@ -53,14 +53,6 @@ function RouteTransition() {
   )
 }
 
-/* =====================================================
-   FOODMAP — App
-
-   A Navbar e o Footer ficam fora das rotas porque
-   aparecem em todas as páginas (no site antigo eles eram
-   injetados por navbar.js/footer.js em cada HTML).
-   ===================================================== */
-
 export default function App() {
   return (
     <DoacoesProvider>

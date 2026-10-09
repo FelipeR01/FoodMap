@@ -1,32 +1,18 @@
 import { createContext, useContext, useState } from 'react'
 
-/* =====================================================
-   FOODMAP — Contexto de Doações
-
-   Guarda a lista de doações num lugar só, para que
-   a página do Mapa e a página de Cadastro de Doador
-   enxerguem os MESMOS dados.
-
-   Antes, no site em HTML puro, os dados estavam
-   duplicados: os pinos do mapa vinham do array "pontos"
-   do mapa.js e os cards do painel estavam escritos à mão
-   no HTML. Aqui os dois passam a vir desta mesma lista.
-   ===================================================== */
-
 const DoacoesContext = createContext()
 
-/* Lista inicial — são as mesmas 4 doações que já existiam
-   no array "pontos" do mapa.js, agora com os campos que
-   os cards do painel também precisam */
+// Endereços e coordenadas são ilustrativos e não foram verificados.
 const doacoesIniciais = [
   {
     id: 1,
-    tipo: 'doador', // doador | urgente
+   tipo: 'doador',
     nome: 'Refeições Prontas',
     origem: 'Restaurante Sabor Bom',
+    endereco: 'Rua Bela Cintra, 550 - Consolação',
     oferta: '15 marmitas para consumo imediato',
-    lat: -23.5614, // latitude (posição no mapa)
-    lng: -46.6559, // longitude
+    lat: -23.5614,
+    lng: -46.6559,
     icone: 'restaurante.png',
     atualizado: 'Atualizado há 2h',
     historico: '1.2k+ doações concluídas',
@@ -40,6 +26,7 @@ const doacoesIniciais = [
     tipo: 'urgente',
     nome: 'Itens de Cesta Básica',
     origem: 'Abrigo Esperança',
+    endereco: 'Rua Domingos de Morais, 2200 - Vila Mariana',
     oferta: 'Necessita: Arroz (50kg), Feijão (20kg) e Óleo (15L)',
     lat: -23.5895,
     lng: -46.6333,
@@ -54,6 +41,7 @@ const doacoesIniciais = [
     tipo: 'doador',
     nome: 'Hortaliças e Verduras',
     origem: 'Hortifrúti Central',
+    endereco: 'Rua Ribeiro de Lima, 453 - Bom Retiro',
     oferta: '30kg de hortaliças — retirada hoje',
     lat: -23.532,
     lng: -46.641,
@@ -70,6 +58,7 @@ const doacoesIniciais = [
     tipo: 'doador',
     nome: 'Pães e Frios',
     origem: 'Padaria União',
+    endereco: 'Rua Harmonia, 900 - Vila Madalena',
     oferta: '8kg de pães — consumo imediato',
     lat: -23.57,
     lng: -46.69,
@@ -81,14 +70,131 @@ const doacoesIniciais = [
     retirada: 'Consumo imediato',
     distancia: 'Distância: 0.7 km',
   },
+  {
+    id: 5,
+    tipo: 'doador',
+    nome: 'Refeições Prontas',
+    origem: 'Cozinha Solidária da Liberdade',
+    endereco: 'Rua da Glória, 450 - Liberdade',
+    oferta: '25 refeições prontas para retirada hoje',
+    lat: -23.56,
+    lng: -46.635,
+    icone: 'restaurante.png',
+    atualizado: 'Atualizado há 30 min',
+    volume: 'Volume: 25 refeições',
+    retirada: 'Retirada até 18h',
+    distancia: 'Região: Liberdade',
+  },
+  {
+    id: 6,
+    tipo: 'doador',
+    nome: 'Refeições Prontas',
+    origem: 'Restaurante Panela da Vila',
+    endereco: 'Rua Vergueiro, 3200 - Vila Mariana',
+    oferta: '12 marmitas vegetarianas disponíveis',
+    lat: -23.589,
+    lng: -46.638,
+    icone: 'restaurante.png',
+    atualizado: 'Atualizado há 1h',
+    volume: 'Volume: 12 marmitas',
+    retirada: 'Consumo imediato',
+    distancia: 'Região: Vila Mariana',
+  },
+  {
+    id: 7,
+    tipo: 'doador',
+    nome: 'Itens de Cesta Básica',
+    origem: 'Mercado Bom Vizinho',
+    endereco: 'Rua dos Lavapés, 280 - Cambuci',
+    oferta: 'Cestas com arroz, feijão, óleo e farinha',
+    lat: -23.565,
+    lng: -46.62,
+    icone: 'relacionamento-com-o-cliente.png',
+    atualizado: 'Atualizado há 2h',
+    volume: 'Volume: 10 cestas',
+    retirada: 'Agendar retirada',
+    distancia: 'Região: Cambuci',
+  },
+  {
+    id: 8,
+    tipo: 'doador',
+    nome: 'Itens de Cesta Básica',
+    origem: 'Associação Rede Alimenta',
+    endereco: 'Avenida Jabaquara, 1800 - Saúde',
+    oferta: 'Grãos e itens não perecíveis para doação',
+    lat: -23.618,
+    lng: -46.64,
+    icone: 'relacionamento-com-o-cliente.png',
+    atualizado: 'Atualizado há 3h',
+    volume: 'Volume: 18 kits',
+    retirada: 'Retirada em horário comercial',
+    distancia: 'Região: Saúde',
+  },
+  {
+    id: 9,
+    tipo: 'doador',
+    nome: 'Hortaliças e Verduras',
+    origem: 'Sacolão Verde Vivo',
+    endereco: 'Rua dos Pinheiros, 820 - Pinheiros',
+    oferta: '18kg de verduras e legumes frescos',
+    lat: -23.567,
+    lng: -46.686,
+    icone: 'salada.png',
+    atualizado: 'Atualizado há 45 min',
+    volume: 'Volume: 18kg',
+    retirada: 'Retirada hoje',
+    distancia: 'Região: Pinheiros',
+  },
+  {
+    id: 10,
+    tipo: 'doador',
+    nome: 'Hortaliças e Verduras',
+    origem: 'Horta Comunitária Butantã',
+    endereco: 'Rua Sapetuba, 300 - Butantã',
+    oferta: 'Caixas de folhas, tomates e temperos',
+    lat: -23.57,
+    lng: -46.715,
+    icone: 'sacolao.png',
+    atualizado: 'Atualizado há 2h',
+    volume: 'Volume: 6 caixas',
+    retirada: 'Retirada pela manhã',
+    distancia: 'Região: Butantã',
+  },
+  {
+    id: 11,
+    tipo: 'doador',
+    nome: 'Pães e Frios',
+    origem: 'Padaria Pão da Praça',
+    endereco: 'Rua Clélia, 1200 - Lapa',
+    oferta: 'Pães do dia e frios embalados',
+    lat: -23.522,
+    lng: -46.704,
+    icone: 'pao.png',
+    atualizado: 'Atualizado há 1h',
+    volume: 'Volume: 14kg',
+    retirada: 'Consumo imediato',
+    distancia: 'Região: Lapa',
+  },
+  {
+    id: 12,
+    tipo: 'doador',
+    nome: 'Pães e Frios',
+    origem: 'Padaria Trigo Dourado',
+    endereco: 'Avenida Braz Leme, 1500 - Santana',
+    oferta: 'Pães, bolos simples e frios',
+    lat: -23.5,
+    lng: -46.625,
+    icone: 'pao.png',
+    atualizado: 'Atualizado há 2h',
+    volume: 'Volume: 9kg',
+    retirada: 'Retirada até 17h',
+    distancia: 'Região: Santana',
+  },
 ]
 
-/* Componente que "envolve" o site inteiro e distribui os dados */
 export function DoacoesProvider({ children }) {
   const [doacoes, setDoacoes] = useState(doacoesIniciais)
 
-  /* Adiciona uma doação nova vinda do formulário de cadastro.
-     O id é gerado a partir da data atual só para não repetir. */
   function adicionarDoacao(novaDoacao) {
     setDoacoes(function (listaAtual) {
       return [{ ...novaDoacao, id: Date.now() }, ...listaAtual]
@@ -102,7 +208,6 @@ export function DoacoesProvider({ children }) {
   )
 }
 
-/* Atalho para as páginas lerem os dados sem repetir useContext */
 export function useDoacoes() {
   return useContext(DoacoesContext)
 }

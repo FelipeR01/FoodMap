@@ -4,10 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import '../css/mapa.css'
 import { useDoacoes } from '../context/DoacoesContext.jsx'
 
-/* Leaflet monta sozinho o caminho das imagens do pino, e esse caminho
-   não existe depois do build do Vite — por isso o pino fica quebrado.
-   O delete abaixo desliga esse cálculo automático, e aí o Leaflet passa
-   a usar exatamente os arquivos importados aqui. */
+/* O Vite precisa dos ícones do Leaflet importados explicitamente para o build. */
 import iconePino from 'leaflet/dist/images/marker-icon.png'
 import iconePino2x from 'leaflet/dist/images/marker-icon-2x.png'
 import sombraPino from 'leaflet/dist/images/marker-shadow.png'
@@ -20,54 +17,49 @@ L.Icon.Default.mergeOptions({
   shadowUrl: sombraPino,
 })
 
-/* =====================================================
-   FOODMAP — Mapa de Doações
-
-   Mesma página do antigo pages/mapa.html + js/mapa.js.
-   A diferença é que os pinos do mapa e os cards do painel
-   agora vêm da MESMA lista (o contexto de doações), então
-   toda doação cadastrada aparece nos dois lugares.
-   ===================================================== */
-
 export default function Mapa() {
   const { doacoes } = useDoacoes()
 
-  // Filtro escolhido nos botões: todos | doador | urgente
   const [filtro, setFiltro] = useState('todos')
 
-  // Guarda qual card foi clicado, para destacá-lo na lista
+  const [alimentoSelecionado, setAlimentoSelecionado] = useState(null)
+
   const [doacaoSelecionada, setDoacaoSelecionada] = useState(null)
 
-  // Guardam o mapa e a camada de pinos entre as renderizações
   const mapaRef = useRef(null)
   const camadaPinosRef = useRef(null)
 
-  // Guarda cada marcador pelo id da doação, para achar depois no clique do card
   const marcadoresRef = useRef({})
 
-  // Aplica o filtro na lista (vale para os pinos e para os cards)
   const doacoesFiltradas = doacoes.filter(function (doacao) {
-    return filtro === 'todos' || doacao.tipo === filtro
+    const correspondeAoTipo = filtro === 'todos' || doacao.tipo === filtro
+    const correspondeAoAlimento =
+      alimentoSelecionado === null || doacao.nome === alimentoSelecionado
+
+    return correspondeAoTipo && correspondeAoAlimento
   })
 
-  /* 1. CRIA O MAPA — roda uma vez só, quando a página abre */
+  const alimentosDisponiveis = Array.from(
+    new Set(doacoes.map(function (doacao) {
+      return doacao.nome
+    }))
+  ).sort(function (a, b) {
+    return a.localeCompare(b, 'pt-BR')
+  })
+
   useEffect(function () {
-    // Cria o mapa dentro da div #mapa, centrado em São Paulo
     const mapa = L.map('mapa').setView([-23.5614, -46.6559], 12)
 
-    // Camada visual do mapa (as "ruas"). Vem do OpenStreetMap (gratuito).
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '© OpenStreetMap',
     }).addTo(mapa)
 
-    // Camada separada só para os pinos, para poder limpar e redesenhar
     const camadaPinos = L.layerGroup().addTo(mapa)
 
     mapaRef.current = mapa
     camadaPinosRef.current = camadaPinos
 
-    // Ao sair da página, destrói o mapa para não sobrar nada na memória
     return function () {
       mapa.remove()
       mapaRef.current = null
@@ -75,23 +67,17 @@ export default function Mapa() {
     }
   }, [])
 
-  /* 2. DESENHA OS PINOS — roda de novo sempre que a lista
-        de doações filtradas mudar (filtro clicado ou
-        doação nova cadastrada) */
   useEffect(
     function () {
       const camadaPinos = camadaPinosRef.current
       if (!camadaPinos) return
 
-      // Limpa os pinos antigos antes de desenhar os novos
       camadaPinos.clearLayers()
       marcadoresRef.current = {}
 
       doacoesFiltradas.forEach(function (doacao) {
-        // Cria o marcador na posição [lat, lng]
         const marcador = L.marker([doacao.lat, doacao.lng])
 
-        // Define o que aparece no popup quando clica no marcador
         const popupHtml =
           '<img class="popup-imagem" src="/assets/' +
           doacao.icone +
@@ -101,7 +87,9 @@ export default function Mapa() {
           '</strong><br>' +
           '<span style="color:#006b30;">' +
           doacao.origem +
-          '</span><br>' +
+          '</span><br><small>Endereço demonstrativo: ' +
+          (doacao.endereco || 'Endereço não informado') +
+          '</small><br>' +
           doacao.oferta +
           (doacao.tipo === 'urgente'
             ? '<br><strong style="color:#ba1a1a;">⚠ ALERTA CRÍTICO</strong>'
@@ -110,38 +98,42 @@ export default function Mapa() {
         marcador.bindPopup(popupHtml)
         marcador.addTo(camadaPinos)
 
-        // Guarda o marcador pelo id, para o clique no card conseguir achá-lo
         marcadoresRef.current[doacao.id] = marcador
       })
+
+      if (doacoesFiltradas.length > 0) {
+        const limites = L.latLngBounds(
+          doacoesFiltradas.map(function (doacao) {
+            return [doacao.lat, doacao.lng]
+          })
+        )
+        mapaRef.current.fitBounds(limites, {
+          padding: [32, 32],
+          maxZoom: 14,
+        })
+      }
+
+      const marcadorSelecionado = marcadoresRef.current[doacaoSelecionada]
+      if (marcadorSelecionado) marcadorSelecionado.openPopup()
     },
-    // Só redesenha quando a lista ou o filtro mudam de verdade.
-    // Se dependesse da lista já filtrada, redesenharia a cada clique
-    // e apagaria o marcador antes do popup abrir.
-    [doacoes, filtro]
+        // O redesenho remove o popup; reabre o do card selecionado após montar os pins.
+    [doacoes, filtro, alimentoSelecionado, doacaoSelecionada]
   )
 
-  /* 3. CLIQUE NO CARD
-        Move o mapa até a doação clicada e abre o popup dela. */
   function focarNoMapa(doacao) {
     const mapa = mapaRef.current
     const marcador = marcadoresRef.current[doacao.id]
     if (!mapa || !marcador) return
 
-    // Marca o card como selecionado para destacá-lo na lista
     setDoacaoSelecionada(doacao.id)
+    setAlimentoSelecionado(doacao.nome)
 
-    // Se a pessoa rolou a página e o mapa saiu da tela, traz ele de volta.
-    // Com "nearest" a página só rola quando é realmente necessário.
     mapa.getContainer().scrollIntoView({ behavior: 'smooth', block: 'nearest' })
 
-    // Desliza o mapa até o ponto, aproxima o zoom e abre o popup
-    mapa.flyTo([doacao.lat, doacao.lng], 15)
-    marcador.openPopup()
   }
 
   return (
     <>
-      {/* titulo da pagina */}
       <section className="mapa-hero">
         <div className="container">
           <h1 className="mapa-hero-titulo">
@@ -158,9 +150,28 @@ export default function Mapa() {
         </div>
       </section>
 
-      {/* barra de filtros */}
       <section className="mapa-filtros">
         <div className="container filtros-bar">
+          <label className="filtro-alimento">
+            <span>Tipo de alimento</span>
+            <select
+              className="filtros-select"
+              value={alimentoSelecionado || ''}
+              onChange={function (evento) {
+                setAlimentoSelecionado(evento.target.value || null)
+                setDoacaoSelecionada(null)
+              }}
+            >
+              <option value="">Todos os alimentos</option>
+              {alimentosDisponiveis.map(function (alimento) {
+                return (
+                  <option key={alimento} value={alimento}>
+                    {alimento}
+                  </option>
+                )
+              })}
+            </select>
+          </label>
           <div className="filtros-botoes">
             <button
               className={
@@ -200,15 +211,12 @@ export default function Mapa() {
         </div>
       </section>
 
-      {/* mapa + painel */}
       <section className="mapa-conteudo">
         <div className="container mapa-grid">
-          {/* lado esquerdo: o mapa Leaflet */}
           <div className="mapa-lado-esquerdo">
             <div id="mapa" className="mapa-iframe"></div>
           </div>
 
-          {/* lado direito: painel logistico */}
           <aside className="painel">
             <div className="painel-cabecalho">
               <h2 className="painel-titulo">Painel Logístico</h2>
@@ -220,7 +228,6 @@ export default function Mapa() {
               Análise de oportunidades e demandas na sua região metropolitana.
             </p>
 
-            {/* card de instrucoes */}
             <div className="painel-instrucoes">
               <p className="instrucoes-titulo">Como utilizar os dados</p>
               <ul className="instrucoes-lista">
@@ -240,10 +247,8 @@ export default function Mapa() {
               </ul>
             </div>
 
-            {/* lista de doações */}
             <div className="painel-lista" id="painel-lista">
               {doacoesFiltradas.map(function (doacao) {
-                // Monta as classes do card: urgente e/ou selecionado
                 let classesDoCard = 'card-doacao'
                 if (doacao.tipo === 'urgente') {
                   classesDoCard = classesDoCard + ' card-urgente'
@@ -269,6 +274,9 @@ export default function Mapa() {
                             {doacao.nome}
                           </h3>
                           <p className="card-origem">{doacao.origem}</p>
+                          <p className="card-endereco">
+                            Endereço demonstrativo: {doacao.endereco || 'não informado'}
+                          </p>
                         </div>
                       </div>
 
@@ -279,7 +287,6 @@ export default function Mapa() {
                       )}
                     </div>
 
-                    {/* Card urgente mostra o bloco de alerta */}
                     {doacao.alerta && (
                       <div className="card-alerta">
                         <p className="alerta-label">
@@ -289,7 +296,6 @@ export default function Mapa() {
                       </div>
                     )}
 
-                    {/* Card de doador mostra as métricas de reputação */}
                     {doacao.historico && (
                       <div className="card-metricas">
                         <div className="card-metrica">

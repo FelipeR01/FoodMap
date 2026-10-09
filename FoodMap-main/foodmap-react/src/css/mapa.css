@@ -15,34 +15,24 @@
     color: var(--color-on-surface);
     margin-bottom: var(--space-sm);
     display: flex;
-    /* Ativa o Flexbox */
     align-items: center;
-    /* Alinha a imagem e o texto verticalmente ao centro */
     gap: 15px;
-    /* Cria um espaço entre a imagem e o texto */
 }
 
 .mapa-hero-titulo img {
     width: 30px;
-    /* Defina a largura que desejar */
     height: auto;
-    /* Mantém a proporção da imagem */
 }
 
 .card-nome {
     display: flex;
-    /* Ativa o Flexbox */
     align-items: center;
-    /* Alinha a imagem e o texto verticalmente ao centro */
     gap: 15px;
-    /* Cria um espaço entre a imagem e o texto */
 }
 
 .card-nome img {
     width: 25px;
-    /* Defina a largura que desejar */
     height: auto;
-    /* Mantém a proporção da imagem */
 }
 
 
@@ -70,6 +60,33 @@
     align-items: center;
     gap: var(--space-md);
     flex-wrap: wrap;
+}
+
+.filtro-alimento {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-on-surface-variant);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+}
+
+.filtros-select {
+    min-width: 220px;
+    max-width: 100%;
+    height: 38px;
+    padding: 0 var(--space-md);
+    color: var(--color-on-surface);
+    background-color: var(--color-surface-container-low);
+    border: 1.5px solid var(--color-outline-variant);
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: var(--text-label-md-size);
+}
+
+.filtros-select:focus {
+    border-color: var(--color-primary);
+    outline: 2px solid rgba(0, 107, 48, 0.15);
 }
 
 .filtros-busca {
@@ -309,6 +326,13 @@
     margin-top: 2px;
 }
 
+.card-endereco {
+    font-size: var(--text-label-sm-size);
+    line-height: 1.4;
+    color: var(--color-on-surface-variant);
+    margin-top: 2px;
+}
+
 .card-update {
     font-size: var(--text-label-sm-size);
     color: var(--color-on-surface-variant);
@@ -432,6 +456,15 @@
 
     .filtros-busca {
         flex: 1;
+    }
+
+    .filtro-alimento {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtros-select {
+        width: 100%;
     }
 
     .filtros-botoes {
