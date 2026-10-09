@@ -1,18 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, Link } from 'react-router-dom'
 
-/* =====================================================
-   FOODMAP — Navbar
-
-   Mesma estrutura do antigo components/navbar.js.
-   O id "nav-bar" e a classe "open" foram mantidos porque
-   o navbar.css usa "#nav-bar.open" para abrir o menu no
-   celular. O link ativo continua usando a classe "active",
-   que o NavLink já coloca sozinho conforme a rota atual.
-   ===================================================== */
-
 export default function Navbar() {
-  // Controla se o menu do celular está aberto ou fechado
   const [aberto, setAberto] = useState(false)
   const [temaEscuro, setTemaEscuro] = useState(function () {
     return localStorage.getItem('foodmap-theme') === 'dark'
@@ -23,7 +12,6 @@ export default function Navbar() {
     localStorage.setItem('foodmap-theme', temaEscuro ? 'dark' : 'light')
   }, [temaEscuro])
 
-  // Fecha o menu ao clicar em qualquer link (igual ao site antigo)
   function fecharMenu() {
     setAberto(false)
   }

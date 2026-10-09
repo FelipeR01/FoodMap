@@ -1,23 +1,12 @@
 import { Link } from 'react-router-dom'
 import '../css/home.css'
 
-/* =====================================================
-   FOODMAP — Início
-
-   Mesmo conteúdo do antigo index.html, dividido nas
-   mesmas 4 seções: Hero, Contexto, Soluções e Impacto.
-   ===================================================== */
-
-/* Link do vídeo pitch exigido na entrega.
-   Trocar pelo link do YouTube quando o vídeo estiver no ar. */
+// Preencher quando o vídeo do projeto estiver publicado.
 const LINK_VIDEO = ''
 
 export default function Inicio() {
   return (
     <>
-      {/* ==========================================
-          1. SEÇÃO HERO (Fundo verde clarinho)
-          ========================================== */}
       <section className="hero bg-surface-bright">
         <div className="container hero__container">
           <div className="secao">
@@ -50,7 +39,6 @@ export default function Inicio() {
                 </Link>
               </div>
 
-              {/* Link do vídeo do projeto (aparece só depois de preenchido) */}
               {LINK_VIDEO !== '' && (
                 <p className="body-md">
                   <a href={LINK_VIDEO} target="_blank" rel="noopener noreferrer">
@@ -71,11 +59,7 @@ export default function Inicio() {
         </div>
       </section>
 
-      {/* ==========================================
-          2. O CONTEXTO BRASILEIRO E NÚMEROS
-          ========================================== */}
       <section className="contexto">
-        {/* Textos (Fundo Branco) */}
         <div className="container contexto__header">
           <div className="contexto-section">
             <span className="section-tag">O Contexto Brasileiro</span>
@@ -93,7 +77,6 @@ export default function Inicio() {
           </div>
         </div>
 
-        {/* Faixa Verde com os Números (Largura Total da Tela) */}
         <div className="faixa-estatisticas bg-primary-fixed">
           <div className="container estatisticas__grid">
             <div className="estatisticas">
@@ -118,9 +101,6 @@ export default function Inicio() {
         </div>
       </section>
 
-      {/* ==========================================
-          3. ARQUITETURA DE SOLUÇÃO (Como Funciona)
-          ========================================== */}
       <section className="solucoes">
         <div className="container">
           <div className="solucoes__header text-center">
@@ -183,9 +163,6 @@ export default function Inicio() {
         </div>
       </section>
 
-      {/* ==========================================
-          4. IMPACTO REAL (Fundo Verde Claro)
-          ========================================== */}
       <section className="impacto bg-primary-fixed">
         <div className="container">
           <div className="impacto__header text-center">

@@ -1,12 +1,5 @@
 import { Link } from 'react-router-dom'
 
-/* =====================================================
-   FOODMAP — Footer
-
-   Mesmo HTML que estava repetido no rodapé de todas as
-   páginas, agora em um componente só.
-   ===================================================== */
-
 export default function Footer() {
   return (
     <footer className="footer bg-inverse">

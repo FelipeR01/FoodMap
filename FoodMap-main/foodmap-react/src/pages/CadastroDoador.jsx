@@ -3,16 +3,6 @@ import { Link } from 'react-router-dom'
 import '../css/cadastro.css'
 import { useDoacoes } from '../context/DoacoesContext.jsx'
 
-/* =====================================================
-   FOODMAP — Cadastro de Doador (funcionalidade nova)
-
-   O doador preenche os dados da doação e ela entra na
-   mesma lista que o Mapa usa. Ou seja: assim que envia,
-   a doação já aparece como pino no mapa e como card no
-   painel logístico, sem recarregar a página.
-   ===================================================== */
-
-/* Cada tipo de alimento usa um ícone que já existe em assets/ */
 const tiposDeAlimento = [
   { valor: 'Refeições Prontas', icone: 'restaurante.png' },
   { valor: 'Hortaliças e Verduras', icone: 'salada.png' },
@@ -20,8 +10,7 @@ const tiposDeAlimento = [
   { valor: 'Itens não perecíveis', icone: 'relacionamento-com-o-cliente.png' },
 ]
 
-/* Como o cadastro é só front-end, cada região já vem com uma
-   coordenada fixa para o pino cair no lugar certo do mapa */
+// O cadastro usa coordenadas fixas por região até haver geocodificação.
 const regioes = [
   { valor: 'Centro', lat: -23.5505, lng: -46.6333 },
   { valor: 'Zona Norte', lat: -23.5, lng: -46.63 },
@@ -33,7 +22,6 @@ const regioes = [
 export default function CadastroDoador() {
   const { adicionarDoacao } = useDoacoes()
 
-  // Guarda o que foi digitado em cada campo do formulário
   const [origem, setOrigem] = useState('')
   const [tipoAlimento, setTipoAlimento] = useState('')
   const [quantidade, setQuantidade] = useState('')
@@ -41,15 +29,10 @@ export default function CadastroDoador() {
   const [horario, setHorario] = useState('')
   const [regiao, setRegiao] = useState('')
 
-  // Guarda as mensagens de erro de cada campo
   const [erros, setErros] = useState({})
 
-  // Controla o aviso de sucesso que aparece depois do envio
   const [enviado, setEnviado] = useState(false)
 
-  /* VALIDAÇÃO
-     Devolve um objeto com os campos que estão errados.
-     Se o objeto vier vazio, está tudo certo. */
   function validar() {
     const novosErros = {}
 
@@ -75,20 +58,17 @@ export default function CadastroDoador() {
     return novosErros
   }
 
-  /* ENVIO DO FORMULÁRIO */
   function enviarFormulario(evento) {
     evento.preventDefault()
 
     const novosErros = validar()
     setErros(novosErros)
 
-    // Se achou algum erro, para por aqui e não cadastra
     if (Object.keys(novosErros).length > 0) {
       setEnviado(false)
       return
     }
 
-    // Descobre o ícone do tipo escolhido e a coordenada da região
     const tipoEscolhido = tiposDeAlimento.find(function (item) {
       return item.valor === tipoAlimento
     })
@@ -96,7 +76,6 @@ export default function CadastroDoador() {
       return item.valor === regiao
     })
 
-    // Monta a doação no mesmo formato das que já existiam
     adicionarDoacao({
       tipo: 'doador',
       nome: tipoAlimento,
@@ -112,7 +91,6 @@ export default function CadastroDoador() {
       validade: validade,
     })
 
-    // Limpa o formulário e mostra o aviso de sucesso
     setOrigem('')
     setTipoAlimento('')
     setQuantidade('')
@@ -135,7 +113,6 @@ export default function CadastroDoador() {
         </div>
 
         <form className="cadastro-form" onSubmit={enviarFormulario}>
-          {/* ── Nome do doador ── */}
           <div className="form-group">
             <label htmlFor="origem">
               Doador ou Estabelecimento <span className="obrigatorio">*</span>
@@ -155,7 +132,6 @@ export default function CadastroDoador() {
             )}
           </div>
 
-          {/* ── Tipo de alimento ── */}
           <div className="form-group">
             <label htmlFor="tipoAlimento">
               Tipo de Alimento <span className="obrigatorio">*</span>
@@ -182,7 +158,6 @@ export default function CadastroDoador() {
             )}
           </div>
 
-          {/* ── Quantidade e Validade ── */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="quantidade">
@@ -222,7 +197,6 @@ export default function CadastroDoador() {
             </div>
           </div>
 
-          {/* ── Horário e Região ── */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="horario">
@@ -274,7 +248,6 @@ export default function CadastroDoador() {
             Cadastrar Doação
           </button>
 
-          {/* Aviso que aparece só depois de cadastrar com sucesso */}
           {enviado && (
             <div className="cadastro-sucesso">
               <p className="sucesso-titulo">Doação cadastrada!</p>
