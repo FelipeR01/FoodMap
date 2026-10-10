@@ -2,7 +2,9 @@ import { useState, useEffect, useRef } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import '../css/mapa.css'
+import TabelaNutricional from '../components/TabelaNutricional.jsx'
 import { useDoacoes } from '../context/DoacoesContext.jsx'
+
 
 /* Leaflet monta sozinho o caminho das imagens do pino, e esse caminho
    não existe depois do build do Vite — por isso o pino fica quebrado.
@@ -49,6 +51,9 @@ export default function Mapa() {
   const doacoesFiltradas = doacoes.filter(function (doacao) {
     return filtro === 'todos' || doacao.tipo === filtro
   })
+  const alimentoSelecionado = doacoes.find(function (doacao) {
+    return doacao.id === doacaoSelecionada
+  })
 
   /* 1. CRIA O MAPA — roda uma vez só, quando a página abre */
   useEffect(function () {
@@ -90,6 +95,9 @@ export default function Mapa() {
       doacoesFiltradas.forEach(function (doacao) {
         // Cria o marcador na posição [lat, lng]
         const marcador = L.marker([doacao.lat, doacao.lng])
+        marcador.on('click', function () {
+          setDoacaoSelecionada(doacao.id)
+        })
 
         // Define o que aparece no popup quando clica no marcador
         const popupHtml =
@@ -320,6 +328,12 @@ export default function Mapa() {
                 )
               })}
             </div>
+
+            <TabelaNutricional
+              alimento={alimentoSelecionado?.nome}
+              porcao={alimentoSelecionado ? '100 g' : undefined}
+              valores={alimentoSelecionado?.valoresNutricionais}
+            />
           </aside>
         </div>
       </section>
