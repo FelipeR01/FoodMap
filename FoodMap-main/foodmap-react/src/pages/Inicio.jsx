@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import '../css/home.css'
 
 // Preencher quando o vídeo do projeto estiver publicado.
-const LINK_VIDEO = ''
+const LINK_VIDEO = 'https://youtu.be/4fvIajTsTxk'
 
 export default function Inicio() {
   return (
