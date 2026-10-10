@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { DoacoesProvider } from './context/DoacoesContext.jsx'
+import { AlimentoProvider } from './context/AlimentoContext.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import Inicio from './pages/Inicio.jsx'
@@ -56,13 +57,15 @@ function RouteTransition() {
 export default function App() {
   return (
     <DoacoesProvider>
-      <Navbar />
+      <AlimentoProvider>
+        <Navbar />
 
-      <main>
-        <RouteTransition />
-      </main>
+        <main>
+          <RouteTransition />
+        </main>
 
-      <Footer />
+        <Footer />
+      </AlimentoProvider>
     </DoacoesProvider>
   )
 }

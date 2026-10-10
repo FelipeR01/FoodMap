@@ -3,7 +3,9 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import '../css/mapa.css'
 import { useDoacoes } from '../context/DoacoesContext.jsx'
-import { restaurantes, ALIMENTOS } from '../data/restaurantes.js'
+import { restaurantes, ALIMENTOS, restaurantesPorAlimento } from '../data/restaurantes.js'
+import CardsAlimentos from '../components/CardsAlimentos.jsx'
+import { useAlimento } from '../context/AlimentoContext.jsx'
 
 /* O Vite precisa dos ícones do Leaflet importados explicitamente para o build. */
 import iconePino from 'leaflet/dist/images/marker-icon.png'
@@ -37,6 +39,10 @@ function montarPopupRestaurante(restaurante) {
 export default function Mapa() {
   const { doacoes } = useDoacoes()
 
+  /* Alimento escolhido nos cards. Apelidado porque ja existe um alimentoSelecionado
+     aqui embaixo, que e o filtro de categoria das doacoes. */
+  const { alimentoSelecionado: alimentoDoCard } = useAlimento()
+
   const [filtro, setFiltro] = useState('todos')
 
   const [alimentoSelecionado, setAlimentoSelecionado] = useState(null)
@@ -47,6 +53,8 @@ export default function Mapa() {
   const camadaPinosRef = useRef(null)
 
   const marcadoresRef = useRef({})
+
+  const circulosRestaurantesRef = useRef({})
 
   const doacoesFiltradas = doacoes.filter(function (doacao) {
     const correspondeAoTipo = filtro === 'todos' || doacao.tipo === filtro
@@ -77,7 +85,7 @@ export default function Mapa() {
     /* Camada separada dos restaurantes (círculos verdes) */
     const camadaRestaurantes = L.layerGroup().addTo(mapa)
     restaurantes.forEach(function (restaurante) {
-      L.circleMarker([restaurante.latitude, restaurante.longitude], {
+      const circulo = L.circleMarker([restaurante.latitude, restaurante.longitude], {
         radius: 9,
         color: '#006b30',
         fillColor: '#2e7d32',
@@ -85,6 +93,8 @@ export default function Mapa() {
       })
         .bindPopup(montarPopupRestaurante(restaurante))
         .addTo(camadaRestaurantes)
+
+      circulosRestaurantesRef.current[restaurante.id] = circulo
     })
 
     mapaRef.current = mapa
@@ -94,6 +104,7 @@ export default function Mapa() {
       mapa.remove()
       mapaRef.current = null
       camadaPinosRef.current = null
+      circulosRestaurantesRef.current = {}
     }
   }, [])
 
@@ -148,6 +159,53 @@ export default function Mapa() {
     },
     // O redesenho remove o popup; reabre o do card selecionado após montar os pins.
     [doacoes, filtro, alimentoSelecionado, doacaoSelecionada]
+  )
+
+  /* Clicar num card de alimento leva o mapa ate os restaurantes que oferecem
+     esse alimento, destacando os circulos deles e apagando os demais. */
+  useEffect(
+    function () {
+      const mapa = mapaRef.current
+      if (!mapa) return
+
+      const comOAlimento = alimentoDoCard ? restaurantesPorAlimento(alimentoDoCard) : []
+      const idsComOAlimento = comOAlimento.map(function (restaurante) {
+        return restaurante.id
+      })
+
+      restaurantes.forEach(function (restaurante) {
+        const circulo = circulosRestaurantesRef.current[restaurante.id]
+        if (!circulo) return
+
+        const destacado = idsComOAlimento.includes(restaurante.id)
+        const apagado = alimentoDoCard !== null && !destacado
+
+        circulo.setRadius(destacado ? 14 : 9)
+        circulo.setStyle({
+          color: destacado ? '#ba6b00' : '#006b30',
+          fillColor: destacado ? '#ff9800' : '#2e7d32',
+          opacity: apagado ? 0.25 : 1,
+          fillOpacity: apagado ? 0.15 : 0.9,
+        })
+      })
+
+      if (comOAlimento.length === 0) return
+
+      const limites = L.latLngBounds(
+        comOAlimento.map(function (restaurante) {
+          return [restaurante.latitude, restaurante.longitude]
+        })
+      )
+      mapa.flyToBounds(limites, { padding: [70, 70], maxZoom: 15 })
+
+      /* Com um unico restaurante, ja abre o balao com o endereco. */
+      if (comOAlimento.length === 1) {
+        circulosRestaurantesRef.current[comOAlimento[0].id].openPopup()
+      }
+
+      mapa.getContainer().scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    },
+    [alimentoDoCard]
   )
 
   function focarNoMapa(doacao) {
@@ -256,6 +314,8 @@ export default function Mapa() {
             <p className="painel-subtitulo">
               Análise de oportunidades e demandas na sua região metropolitana.
             </p>
+
+            <CardsAlimentos />
 
             <div className="painel-instrucoes">
               <p className="instrucoes-titulo">Como utilizar os dados</p>
