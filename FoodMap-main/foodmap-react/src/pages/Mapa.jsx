@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import '../css/mapa.css'
 import { useDoacoes } from '../context/DoacoesContext.jsx'
 import { restaurantes, ALIMENTOS } from '../data/restaurantes.js'
+import CardsAlimentos from '../components/CardsAlimentos.jsx'
 
 /* O Vite precisa dos ícones do Leaflet importados explicitamente para o build. */
 import iconePino from 'leaflet/dist/images/marker-icon.png'
@@ -256,6 +257,8 @@ export default function Mapa() {
             <p className="painel-subtitulo">
               Análise de oportunidades e demandas na sua região metropolitana.
             </p>
+
+            <CardsAlimentos />
 
             <div className="painel-instrucoes">
               <p className="instrucoes-titulo">Como utilizar os dados</p>
