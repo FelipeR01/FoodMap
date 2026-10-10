@@ -3,6 +3,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import '../css/mapa.css'
 import { useDoacoes } from '../context/DoacoesContext.jsx'
+import { restaurantes, ALIMENTOS } from '../data/restaurantes.js'
 
 /* O Vite precisa dos ícones do Leaflet importados explicitamente para o build. */
 import iconePino from 'leaflet/dist/images/marker-icon.png'
@@ -16,6 +17,22 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: iconePino2x,
   shadowUrl: sombraPino,
 })
+
+/* Monta o HTML do popup de um restaurante: nome, endereço e alimentos disponíveis */
+function montarPopupRestaurante(restaurante) {
+  const listaAlimentos = restaurante.alimentos
+    .map(function (id) {
+      return '<li>' + ALIMENTOS[id].nome + '</li>'
+    })
+    .join('')
+
+  return (
+    '<strong>' + restaurante.nome + '</strong><br>' +
+    '<small>' + restaurante.endereco + '</small><br>' +
+    '<span style="color:#006b30;">Alimentos disponíveis:</span>' +
+    '<ul style="margin:4px 0 0 16px;padding:0;">' + listaAlimentos + '</ul>'
+  )
+}
 
 export default function Mapa() {
   const { doacoes } = useDoacoes()
@@ -56,6 +73,19 @@ export default function Mapa() {
     }).addTo(mapa)
 
     const camadaPinos = L.layerGroup().addTo(mapa)
+
+    /* Camada separada dos restaurantes (círculos verdes) */
+    const camadaRestaurantes = L.layerGroup().addTo(mapa)
+    restaurantes.forEach(function (restaurante) {
+      L.circleMarker([restaurante.latitude, restaurante.longitude], {
+        radius: 9,
+        color: '#006b30',
+        fillColor: '#2e7d32',
+        fillOpacity: 0.9,
+      })
+        .bindPopup(montarPopupRestaurante(restaurante))
+        .addTo(camadaRestaurantes)
+    })
 
     mapaRef.current = mapa
     camadaPinosRef.current = camadaPinos
@@ -116,7 +146,7 @@ export default function Mapa() {
       const marcadorSelecionado = marcadoresRef.current[doacaoSelecionada]
       if (marcadorSelecionado) marcadorSelecionado.openPopup()
     },
-        // O redesenho remove o popup; reabre o do card selecionado após montar os pins.
+    // O redesenho remove o popup; reabre o do card selecionado após montar os pins.
     [doacoes, filtro, alimentoSelecionado, doacaoSelecionada]
   )
 
@@ -129,7 +159,6 @@ export default function Mapa() {
     setAlimentoSelecionado(doacao.nome)
 
     mapa.getContainer().scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-
   }
 
   return (
