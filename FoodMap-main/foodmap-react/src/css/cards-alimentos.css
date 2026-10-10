@@ -13,6 +13,31 @@
   color: var(--color-on-surface-variant);
 }
 
+/* Mesma rolagem usada na painel-lista, porque sao 27 alimentos. */
+.cards-alimentos__lista {
+  display: grid;
+  gap: var(--space-md);
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-outline-variant) transparent;
+}
+
+.grupo-alimentos {
+  display: grid;
+  gap: 8px;
+}
+
+.grupo-alimentos__nome {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
 .card-alimento {
   display: grid;
   grid-template-columns: 48px 1fr auto;
