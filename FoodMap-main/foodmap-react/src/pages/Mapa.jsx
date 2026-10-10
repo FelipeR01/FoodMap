@@ -6,6 +6,8 @@ import { useDoacoes } from '../context/DoacoesContext.jsx'
 import { restaurantes, ALIMENTOS, restaurantesPorAlimento } from '../data/restaurantes.js'
 import CardsAlimentos from '../components/CardsAlimentos.jsx'
 import { useAlimento } from '../context/AlimentoContext.jsx'
+import { buscarAlimento } from '../data/alimentos.js'
+import TabelaNutricional from '../components/TabelaNutricional.jsx'
 
 /* O Vite precisa dos ícones do Leaflet importados explicitamente para o build. */
 import iconePino from 'leaflet/dist/images/marker-icon.png'
@@ -42,6 +44,10 @@ export default function Mapa() {
   /* Alimento escolhido nos cards. Apelidado porque ja existe um alimentoSelecionado
      aqui embaixo, que e o filtro de categoria das doacoes. */
   const { alimentoSelecionado: alimentoDoCard } = useAlimento()
+
+  /* Ficha completa do alimento escolhido no card (nome, icone, grupo e nutricao).
+     Fica null quando nenhum card esta selecionado. */
+  const alimentoDaTabela = buscarAlimento(alimentoDoCard)
 
   const [filtro, setFiltro] = useState('todos')
 
@@ -302,6 +308,12 @@ export default function Mapa() {
         <div className="container mapa-grid">
           <div className="mapa-lado-esquerdo">
             <div id="mapa" className="mapa-iframe"></div>
+
+            <TabelaNutricional
+              alimento={alimentoDaTabela?.nome}
+              porcao={alimentoDaTabela?.nutricao.porcao}
+              valores={alimentoDaTabela?.nutricao}
+            />
           </div>
 
           <aside className="painel">

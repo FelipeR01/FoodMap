@@ -1,0 +1,85 @@
+.tabela-nutricional {
+  width: 100%;
+  max-width: 480px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 12px;
+  background-color: var(--color-surface-container-lowest);
+  color: var(--color-on-surface);
+  text-align: left;
+}
+
+.tabela-nutricional__titulo {
+  padding: 16px 20px;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.tabela-nutricional__cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tabela-nutricional__porcao {
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-label-md-size);
+  font-weight: 500;
+}
+
+.tabela-nutricional th,
+.tabela-nutricional td {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.tabela-nutricional thead {
+  background-color: var(--color-surface-container-low);
+  color: var(--color-on-surface-variant);
+}
+
+.tabela-nutricional tbody th {
+  font-weight: 500;
+}
+
+.tabela-nutricional tbody td {
+  text-align: right;
+}
+
+.tabela-nutricional__vazio {
+  padding: 24px 20px;
+  color: var(--color-on-surface-variant);
+  text-align: center !important;
+}
+
+.tabela-nutricional tfoot td {
+  padding: 12px 20px;
+  border-top: 1px solid var(--color-outline-variant);
+  border-bottom: 0;
+  color: var(--color-on-surface-variant);
+  font-size: var(--text-label-sm-size);
+}
+
+.tabela-nutricional tbody tr:last-child th,
+.tabela-nutricional tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .tabela-nutricional th,
+  .tabela-nutricional td {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .tabela-nutricional__titulo {
+    padding: 14px 12px;
+  }
+}
