@@ -214,6 +214,11 @@ export default function Mapa() {
           {/* lado esquerdo: o mapa Leaflet */}
           <div className="mapa-lado-esquerdo">
             <div id="mapa" className="mapa-iframe"></div>
+            <TabelaNutricional
+              alimento={alimentoSelecionado?.nome}
+              porcao={alimentoSelecionado ? '100 g' : undefined}
+              valores={alimentoSelecionado?.valoresNutricionais}
+            />
           </div>
 
           {/* lado direito: painel logistico */}
@@ -328,12 +333,6 @@ export default function Mapa() {
                 )
               })}
             </div>
-
-            <TabelaNutricional
-              alimento={alimentoSelecionado?.nome}
-              porcao={alimentoSelecionado ? '100 g' : undefined}
-              valores={alimentoSelecionado?.valoresNutricionais}
-            />
           </aside>
         </div>
       </section>
